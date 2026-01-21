@@ -552,3 +552,48 @@ body {
     background: radial-gradient(circle at top left, #f5f7ff 0, #ffffff 45%, #f6fbff 100%);
 }
 
+/* Calendario y selector hora */
+.date-picker-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#fechaCita {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    width: 200px;
+}
+
+#horaCita {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    width: 120px;
+}
+
+.btn-confirmar-whatsapp {
+    background: var(--color-success);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-confirmar-whatsapp:hover {
+    background: #218838;
+    transform: translateY(-1px);
+}
+
+.whatsapp-modal {
+    position: fixed;
+    top: 0;
+    left
+
