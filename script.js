@@ -337,6 +337,7 @@ function actualizarLista() {
                 <button onclick="editarPaciente('${p.codigo}')" class="btn btn-secondary">✏️ Editar</button>
                 <button onclick="eliminarPaciente('${p.codigo}')" class="btn btn-danger">🗑️ Eliminar</button>
                 <button onclick="enviarPresupuestoDesdeLista('${p.codigo}')" class="btn btn-secondary">💰 Presupuesto</button>
+                <button onclick="enviarRecordatorioDesdeLista('${p.codigo}')" class="btn btn-secondary">📅 Recordatorio</button>
             </div>
         </div>
     `).join('');
@@ -549,6 +550,20 @@ function enviarWhatsAppRegistro(paciente, datosCita = {}) {
 
     const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
     window.open(url, '_blank');
+}
+
+function enviarRecordatorioDesdeLista(codigo) {
+    const paciente = pacientes.find(p => p.codigo === codigo);
+    if (!paciente) return alert('Paciente no encontrado');
+    if (!paciente.telefono) return alert('Este paciente no tiene teléfono registrado');
+
+    const fecha = prompt('Fecha de la cita (ej. 25/02/2026):', '');
+    if (fecha === null) return;
+
+    const hora = prompt('Hora de la cita (ej. 4:00 pm):', '');
+    if (hora === null) return;
+
+    enviarWhatsAppRegistro(paciente, { fecha, hora });
 }
 
 // WHATSAPP - PRESUPUESTO
