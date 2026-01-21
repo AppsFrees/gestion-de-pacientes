@@ -200,6 +200,7 @@ function buscarPacientes() {
                 <button onclick="mostrarPaciente('${p.codigo}')" class="btn btn-small">Ver</button>
                 <button onclick="editarPaciente('${p.codigo}')" class="btn btn-small">Editar</button>
                 <button onclick="enviarPresupuestoDesdeLista('${p.codigo}')" class="btn btn-small">💰</button>
+                <button onclick="enviarRecordatorioDesdeLista('${p.codigo}')" class="btn btn-small">📅</button>
             </div>
         </div>
     `).join('');
@@ -285,11 +286,12 @@ function agregarPaciente(e) {
     guardarPacientes();
     sincronizarGitHub();
     document.getElementById('formPaciente').reset();
-    cargarOpcionesTratamiento(); // para que no se quede vacío el select
+    cargarOpcionesTratamiento();
     actualizarLista();
     actualizarEstadisticas();
     alert('✅ Paciente agregado exitosamente');
 
+    // CONFIRMACIÓN PREVIA Y ENVÍO AUTOMÁTICO
     const enviarWA = confirm('¿Quieres enviar un mensaje de WhatsApp a este paciente?');
     if (enviarWA && nuevoPaciente.telefono) {
         const fecha = prompt('Fecha de la próxima cita (ej. 25/02/2026):', '');
@@ -552,6 +554,7 @@ function enviarWhatsAppRegistro(paciente, datosCita = {}) {
     window.open(url, '_blank');
 }
 
+// Recordatorio desde la lista
 function enviarRecordatorioDesdeLista(codigo) {
     const paciente = pacientes.find(p => p.codigo === codigo);
     if (!paciente) return alert('Paciente no encontrado');
@@ -601,3 +604,4 @@ function enviarWhatsAppPresupuesto(paciente, data) {
     const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
     window.open(url, '_blank');
 }
+
