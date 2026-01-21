@@ -1,9 +1,9 @@
 // CONFIGURACIÓN Y VARIABLES GLOBALES
 let pacientes = [];
 let configGitHub = {
-    token: localStorage.getItem('githubToken') || '',
-    user: localStorage.getItem('githubUser') || 'lizardoba',
-    repo: localStorage.getItem('githubRepo') || 'gestor-pacientes',
+    token: localStorage.getItem('githubToken') || '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',
+    user: localStorage.getItem('githubUser') || 'AppsFrees',
+    repo: localStorage.getItem('githubRepo') || 'gestion-de-pacientes',
     branch: 'main',
     filePath: 'datos-pacientes.json'
 };
