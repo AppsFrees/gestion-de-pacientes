@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestor de Pacientes - Sincronizado con GitHub</title>
+    <title>Gestor de Pacientes Dental - DentoFi</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,100 +11,86 @@
         <!-- Header -->
         <header class="header">
             <div class="header-content">
-                <img id="appLogo" class="app-logo" src="" alt="Logo clínica" style="display:none; width:60px; height:60px; object-fit:cover; border-radius:50%; margin-bottom:8px;">
-                <h1 id="appName">🏥 Gestor de Pacientes</h1>
-                <p id="appSubtitle">Sistema profesional de gestión con sincronización GitHub</p>
+                <img id="appLogo" class="app-logo" src="" alt="Logo clínica" style="display:none;">
+                <div>
+                    <h1 id="appName">🏥 Gestor de Pacientes</h1>
+                    <p id="appSubtitle">Sistema profesional de gestión dental</p>
+                </div>
             </div>
             <div class="github-sync">
-                <button id="btnSync" class="btn-sync">🔄 Sincronizar GitHub</button>
-                <button onclick="mostrarConfigApp()" class="btn btn-secondary">⚙️ Configurar App</button>
-                <button onclick="mostrarConfigWA()" class="btn btn-secondary">📲 Recordatorio WhatsApp</button>
-                <button onclick="mostrarConfigPresupuesto()" class="btn btn-secondary">💰 Plantilla Presupuesto</button>
+                <button id="btnSync" class="btn-sync">🔄 Sincronizar</button>
+                <button onclick="mostrarConfigApp()" class="btn btn-config">⚙️ App</button>
+                <button onclick="mostrarConfigWA()" class="btn btn-config">📲 WhatsApp</button>
+                <button onclick="mostrarConfig()" class="btn btn-config">🔐 GitHub</button>
                 <span id="statusSync" class="status-sync"></span>
             </div>
         </header>
 
-        <!-- Formulario de Configuración GitHub -->
+        <!-- Configuración GitHub -->
         <section class="github-config" id="githubConfig" style="display: none;">
-            <h3>Configuración de GitHub</h3>
-            <div class="form-group">
-                <label>Token Personal de GitHub (PAT):</label>
-                <input type="password" id="githubToken" placeholder="ghp_..." />
+            <h3>⚙️ Configuración de GitHub</h3>
+            <div class="config-grid">
+                <div class="form-group">
+                    <label>Token Personal (PAT):</label>
+                    <input type="password" id="githubToken" placeholder="ghp_..." />
+                </div>
+                <div class="form-group">
+                    <label>Usuario GitHub:</label>
+                    <input type="text" id="githubUser" placeholder="tu-usuario" />
+                </div>
+                <div class="form-group">
+                    <label>Nombre Repositorio:</label>
+                    <input type="text" id="githubRepo" placeholder="repo-nombre" />
+                </div>
             </div>
-            <div class="form-group">
-                <label>Usuario GitHub:</label>
-                <input type="text" id="githubUser" placeholder="tu-usuario" />
+            <div class="config-buttons">
+                <button onclick="guardarConfigGitHub()" class="btn btn-primary">✅ Guardar</button>
+                <button onclick="ocultarConfig()" class="btn btn-secondary">✖️ Cancelar</button>
             </div>
-            <div class="form-group">
-                <label>Nombre del Repositorio:</label>
-                <input type="text" id="githubRepo" value="gestor-pacientes" />
-            </div>
-            <button onclick="guardarConfigGitHub()" class="btn btn-primary">Guardar Configuración</button>
-            <button onclick="ocultarConfig()" class="btn btn-secondary">Cancelar</button>
         </section>
 
-        <!-- Configuración de la App -->
+        <!-- Configuración App -->
         <section class="github-config" id="appConfig" style="display:none;">
-            <h3>Configuración de la App</h3>
-
-            <div class="form-group">
-                <label>Nombre de la App:</label>
-                <input type="text" id="inputAppName" placeholder="Nombre de tu clínica" />
+            <h3>🎨 Configuración de la App</h3>
+            <div class="config-grid">
+                <div class="form-group">
+                    <label>Nombre Clínica:</label>
+                    <input type="text" id="inputAppName" placeholder="Mi Clínica Dental" />
+                </div>
+                <div class="form-group">
+                    <label>Subtítulo:</label>
+                    <input type="text" id="inputAppSubtitle" placeholder="Sistema de gestión" />
+                </div>
+                <div class="form-group">
+                    <label>Logo:</label>
+                    <input type="file" id="inputAppLogo" accept="image/*" />
+                </div>
             </div>
-
-            <div class="form-group">
-                <label>Subtítulo:</label>
-                <input type="text" id="inputAppSubtitle" placeholder="Descripción corta" />
+            <div class="config-buttons">
+                <button onclick="guardarConfigApp()" class="btn btn-primary">✅ Guardar</button>
+                <button onclick="ocultarConfigApp()" class="btn btn-secondary">✖️ Cancelar</button>
             </div>
-
-            <div class="form-group">
-                <label>Logo de la clínica:</label>
-                <input type="file" id="inputAppLogo" accept="image/*" />
-            </div>
-
-            <button onclick="guardarConfigApp()" class="btn btn-primary">Guardar</button>
-            <button onclick="ocultarConfigApp()" class="btn btn-secondary">Cancelar</button>
         </section>
 
-        <!-- Configuración plantilla recordatorio WhatsApp -->
+        <!-- Configuración WhatsApp -->
         <section class="github-config" id="waConfig" style="display:none;">
-            <h3>Plantilla de recordatorio de citas</h3>
-            <p>Puedes usar: {nombre}, {fecha_cita}, {hora_cita}</p>
+            <h3>📱 Plantilla Recordatorio WhatsApp</h3>
+            <p class="help-text">Puedes usar: {nombre}, {fecha_cita}, {hora_cita}</p>
             <div class="form-group">
-                <textarea id="textareaPlantillaWA" rows="4"></textarea>
+                <textarea id="textareaPlantillaWA" rows="4" placeholder="Hola {nombre}..."></textarea>
             </div>
-            <button class="btn btn-primary" onclick="guardarConfigWA()">Guardar Plantilla</button>
-            <button class="btn btn-secondary" onclick="ocultarConfigWA()">Cancelar</button>
-        </section>
-
-        <!-- Configuración plantilla presupuesto -->
-        <section class="github-config" id="presupuestoConfig" style="display:none;">
-            <h3>Plantilla de presupuesto</h3>
-            <p>Puedes usar: {nombre}, {tratamiento}, {monto}, {detalles}</p>
-            <div class="form-group">
-                <textarea id="textareaPlantillaPresupuesto" rows="4"></textarea>
+            <div class="config-buttons">
+                <button class="btn btn-primary" onclick="guardarConfigWA()">✅ Guardar</button>
+                <button class="btn btn-secondary" onclick="ocultarConfigWA()">✖️ Cancelar</button>
             </div>
-            <button class="btn btn-primary" onclick="guardarConfigPresupuesto()">Guardar Plantilla</button>
-            <button class="btn btn-secondary" onclick="ocultarConfigPresupuesto()">Cancelar</button>
         </section>
-
-        <!-- Señal de Configuración -->
-        <div class="alert alert-info" style="display: none;" id="alertConfig">
-            <strong>⚙️ Configuración Requerida:</strong> Configura tu token de GitHub para sincronizar datos.
-            <button onclick="mostrarConfig()" class="btn-link">Configurar Ahora</button>
-        </div>
 
         <div class="content">
-            <!-- Sección de Búsqueda -->
+            <!-- Búsqueda -->
             <section class="search-section">
                 <h2>🔍 Búsqueda de Pacientes</h2>
                 <div class="search-container">
-                    <input 
-                        type="text" 
-                        id="searchInput" 
-                        class="search-input" 
-                        placeholder="Busca por código, nombre o apellido..."
-                    />
+                    <input type="text" id="searchInput" class="search-input" placeholder="Busca por código, nombre o apellido..."/>
                     <select id="tipoSearch" class="search-select">
                         <option value="todos">Todos</option>
                         <option value="codigo">Código</option>
@@ -116,36 +102,39 @@
             </section>
 
             <div class="two-columns">
-                <!-- Formulario de Registro -->
+                <!-- Formulario Registro -->
                 <section class="form-section">
                     <h2>➕ Nuevo Paciente</h2>
                     <form id="formPaciente" class="form-paciente">
                         <div class="form-group">
-                            <label>Código de Paciente:</label>
+                            <label>Código:</label>
                             <input type="text" id="codigo" placeholder="P-001" required />
                         </div>
-                        <div class="form-group">
-                            <label>Nombre:</label>
-                            <input type="text" id="nombre" placeholder="Juan" required />
-                        </div>
-                        <div class="form-group">
-                            <label>Apellido:</label>
-                            <input type="text" id="apellido" placeholder="Pérez" required />
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Nombre:</label>
+                                <input type="text" id="nombre" placeholder="Juan" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Apellido:</label>
+                                <input type="text" id="apellido" placeholder="Pérez" required />
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Email:</label>
                             <input type="email" id="email" placeholder="correo@ejemplo.com" />
                         </div>
                         <div class="form-group">
-                            <label>Teléfono:</label>
-                            <input type="tel" id="telefono" placeholder="519XXXXXXXX" />
+                            <label>Teléfono WhatsApp:</label>
+                            <input type="tel" id="telefono" placeholder="+51 999 727 221" />
+                            <small>Ejemplo: +51999727221 o 51999727221</small>
                         </div>
                         <div class="form-group">
-                            <label>Diagnóstico Clínico:</label>
-                            <textarea id="diagnostico" placeholder="Describe el diagnóstico..."></textarea>
+                            <label>Diagnóstico:</label>
+                            <textarea id="diagnostico" placeholder="Descripción del caso..."></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Tipo de Tratamiento:</label>
+                            <label>Tratamiento:</label>
                             <select id="tratamiento"></select>
                         </div>
                         <div class="form-group">
@@ -156,17 +145,17 @@
                                 <option>Completado</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Guardar Paciente</button>
+                        <button type="submit" class="btn btn-primary btn-lg">💾 Guardar Paciente</button>
                     </form>
 
-                    <!-- Gestión de tratamientos -->
+                    <!-- Tratamientos -->
                     <section class="form-section" style="margin-top:20px;">
-                        <h2>🦷 Tratamientos</h2>
+                        <h2>🦷 Gestionar Tratamientos</h2>
                         <div class="form-group">
                             <label>Nuevo tratamiento:</label>
-                            <div style="display:flex; gap:10px;">
-                                <input type="text" id="nuevoTratamiento" placeholder="Nombre del tratamiento" style="flex:1;">
-                                <button type="button" class="btn btn-secondary" onclick="agregarTratamiento()">Agregar</button>
+                            <div style="display:flex; gap:8px;">
+                                <input type="text" id="nuevoTratamiento" placeholder="Ej: Blanqueamiento" style="flex:1;"/>
+                                <button type="button" class="btn btn-success" onclick="agregarTratamiento()">➕ Agregar</button>
                             </div>
                         </div>
                         <ul id="listaTratamientos" class="tratamientos-list"></ul>
@@ -179,37 +168,84 @@
                     <div class="stats-container">
                         <div class="stat-card">
                             <h3 id="totalPacientes">0</h3>
-                            <p>Pacientes Totales</p>
+                            <p>Total Pacientes</p>
+                            <span class="icon">👥</span>
                         </div>
                         <div class="stat-card">
                             <h3 id="pacientesActivos">0</h3>
-                            <p>Pacientes Activos</p>
+                            <p>En Tratamiento</p>
+                            <span class="icon">⚕️</span>
                         </div>
                         <div class="stat-card">
                             <h3 id="pacientesCompletados">0</h3>
-                            <p>Tratamientos Completados</p>
+                            <p>Completados</p>
+                            <span class="icon">✅</span>
                         </div>
                     </div>
                     <div class="buttons-export">
-                        <button onclick="exportarJSON()" class="btn btn-secondary">📥 Exportar JSON</button>
-                        <button onclick="importarJSON()" class="btn btn-secondary">📤 Importar JSON</button>
+                        <button onclick="exportarJSON()" class="btn btn-secondary">📥 Exportar</button>
+                        <button onclick="importarJSON()" class="btn btn-secondary">📤 Importar</button>
                     </div>
                 </section>
             </div>
 
-            <!-- Lista de Pacientes -->
+            <!-- Lista Pacientes -->
             <section class="patients-section">
-                <h2>👥 Lista de Pacientes</h2>
+                <h2>👥 Pacientes Registrados</h2>
                 <div id="listaPacientes" class="patients-list">
-                    <p class="empty-message">No hay pacientes registrados</p>
+                    <p class="empty-message">📭 No hay pacientes registrados</p>
                 </div>
             </section>
         </div>
     </div>
 
-    <!-- Input oculto para importar -->
-    <input type="file" id="fileInput" style="display: none;" accept=".json" />
+    <!-- Modal Cita WhatsApp -->
+    <div id="modalCita" class="modal" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📅 Agendar Cita</h3>
+                <button type="button" class="modal-close" onclick="cerrarModalCita()">✖️</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Fecha de la cita:</label>
+                    <input type="date" id="fechaCita" required />
+                </div>
+                <div class="form-group">
+                    <label>Hora de la cita:</label>
+                    <select id="horaCita" required>
+                        <option value="">Selecciona hora...</option>
+                        <option value="08:00">08:00 AM</option>
+                        <option value="08:30">08:30 AM</option>
+                        <option value="09:00">09:00 AM</option>
+                        <option value="09:30">09:30 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="10:30">10:30 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="11:30">11:30 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="12:30">12:30 PM</option>
+                        <option value="14:00">02:00 PM</option>
+                        <option value="14:30">02:30 PM</option>
+                        <option value="15:00">03:00 PM</option>
+                        <option value="15:30">03:30 PM</option>
+                        <option value="16:00">04:00 PM</option>
+                        <option value="16:30">04:30 PM</option>
+                        <option value="17:00">05:00 PM</option>
+                        <option value="17:30">05:30 PM</option>
+                        <option value="18:00">06:00 PM</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="cerrarModalCita()" class="btn btn-secondary">Cancelar</button>
+                <button onclick="enviarWhatsAppDesdeModal()" class="btn btn-primary">✅ Enviar WhatsApp</button>
+            </div>
+        </div>
+    </div>
 
+    <input type="file" id="fileInput" style="display: none;" accept=".json" />
     <script src="script.js"></script>
 </body>
 </html>
+
