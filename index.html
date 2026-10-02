@@ -57,9 +57,8 @@
 
     <header class="no-print bg-indigo-700 text-white shadow-lg p-4 flex flex-wrap justify-between items-center gap-4">
         <div class="flex items-center space-x-3">
-            <div id="headerLogoContainer" class="bg-white/10 p-2 rounded-xl flex items-center justify-center min-w-10 min-h-10 max-w-12 max-h-12 overflow-hidden">
-                <i id="defaultHeaderIcon" class="fa-solid fa-tooth text-2xl text-white"></i>
-                <img id="customHeaderLogo" class="hidden max-h-10 object-contain" alt="Logo">
+            <div id="headerLogoContainer" class="hidden bg-white/10 p-2 rounded-xl items-center justify-center min-w-10 min-h-10 max-w-12 max-h-12 overflow-hidden">
+                <img id="customHeaderLogo" class="hidden max-h-10 object-contain" alt="Logo de la clínica">
             </div>
             <div>
                 <h1 id="appTitleDisplay" class="text-xl font-bold tracking-tight">OdontoFlow Studio Pro</h1>
@@ -644,8 +643,7 @@
                 <div id="clinicalPrintReportArea" class="print-only hidden bg-white p-6 rounded-2xl border border-slate-200 space-y-4">
                     <div class="flex justify-between items-start border-b border-slate-300 pb-4">
                         <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 flex items-center justify-center">
-                                <i id="defaultPrintIcon" class="fa-solid fa-tooth text-3xl text-indigo-600"></i>
+                            <div id="printLogoContainer" class="hidden w-12 h-12 items-center justify-center overflow-hidden">
                                 <img id="customPrintLogo" class="hidden max-h-12 max-w-12 object-contain" alt="Logo de la clínica">
                             </div>
                             <div>
@@ -983,20 +981,13 @@
 
                 <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
                     <h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider text-indigo-600">2. Logo de la Clínica</h3>
-                    <p class="text-[11px] text-slate-500">El logo se guarda en este navegador y se incluye en la copia de seguridad.</p>
+                    <p class="text-[11px] text-slate-500">El logo se guarda localmente e ingresa en la copia de seguridad.</p>
                     <div class="flex flex-wrap items-center gap-3">
-                        <div class="w-16 h-16 bg-white border border-slate-200 rounded-xl flex items-center justify-center overflow-hidden">
-                            <i id="settingsDefaultLogoIcon" class="fa-solid fa-tooth text-2xl text-indigo-600"></i>
-                            <img id="settingsLogoPreview" class="hidden w-full h-full object-contain" alt="Vista previa del logo">
-                        </div>
-                        <div class="flex-1 min-w-52">
-                            <input id="settingLogoFile" type="file" accept="image/png,image/jpeg,image/webp" onchange="handleLogoFileChange(event)" class="block w-full text-xs border border-slate-300 rounded-lg p-2 bg-white">
-                            <p class="text-[10px] text-slate-500 mt-1">PNG, JPG o WEBP; máximo 2 MB. Guardar cambios para confirmar.</p>
-                        </div>
+                        <div id="settingsLogoContainer" class="hidden w-16 h-16 bg-white border border-slate-200 rounded-xl items-center justify-center overflow-hidden"><img id="settingsLogoPreview" class="hidden w-full h-full object-contain" alt="Vista previa del logo"></div>
+                        <div class="flex-1 min-w-52"><input id="settingLogoFile" type="file" accept="image/png,image/jpeg,image/webp" onchange="handleLogoFileChange(event)" class="block w-full text-xs border border-slate-300 rounded-lg p-2 bg-white"><p class="text-[10px] text-slate-500 mt-1">PNG, JPG o WEBP; máximo 2 MB.</p></div>
                         <button type="button" onclick="removeCustomLogo()" class="bg-rose-100 text-rose-700 hover:bg-rose-200 px-3 py-2 rounded-lg font-semibold cursor-pointer">Quitar logo</button>
                     </div>
                 </div>
-
                 <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider text-indigo-600">3. Estados Clínicos & Colores</h3>
@@ -1018,15 +1009,10 @@
                     <div class="space-y-2 max-h-52 overflow-y-auto pr-1" id="settingsTariffsContainer">
                     </div>
                 </div>
-
                 <div class="space-y-3 bg-amber-50 p-4 rounded-xl border border-amber-200">
                     <h3 class="font-bold text-amber-800 text-xs uppercase tracking-wider">5. Copia de Seguridad Completa</h3>
-                    <p class="text-[11px] text-amber-900">Incluye pacientes, ficha actual, citas, campañas, fidelización, consentimientos, tarifas, ajustes y logo. La importación reemplaza los datos de esta app en este navegador.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <button type="button" onclick="exportFullDatabase()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg font-semibold cursor-pointer hover:bg-emerald-700">Exportar base de datos completa</button>
-                        <button type="button" onclick="document.getElementById('databaseImportFile').click()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold cursor-pointer hover:bg-indigo-700">Importar base de datos completa</button>
-                        <input id="databaseImportFile" type="file" accept=".json,application/json" onchange="handleDatabaseImport(event)" class="hidden">
-                    </div>
+                    <p class="text-[11px] text-amber-900">Incluye pacientes, ficha, citas, campañas, fidelización, configuraciones y logo. La importación reemplaza la información actual del navegador.</p>
+                    <div class="flex flex-wrap gap-2"><button type="button" onclick="exportFullDatabase()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg font-semibold cursor-pointer hover:bg-emerald-700">Exportar base completa</button><button type="button" onclick="document.getElementById('databaseImportFile').click()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold cursor-pointer hover:bg-indigo-700">Importar base completa</button><input id="databaseImportFile" type="file" accept=".json,application/json" onchange="handleDatabaseImport(event)" class="hidden"></div>
                 </div>
             </div>
 
@@ -1072,7 +1058,7 @@
     <div id="consentPrintArea" class="hidden"></div>
 
     <!-- BOTÓN FLOTANTE GUARDAR PACIENTE -->
-    <div id="floatingSaveBtn" class="no-print fixed bottom-6 right-6 z-40 transition-transform transform translate-y-0">
+    <div id="floatingSaveBtn" class="no-print hidden fixed bottom-6 right-6 z-40 transition-transform transform translate-y-0">
         <button onclick="manualSavePatient()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-4 rounded-2xl shadow-[0_10px_25px_rgba(16,185,129,0.5)] font-bold flex items-center gap-3 border-2 border-emerald-300 transition-all hover:scale-105 animate-bounce cursor-pointer">
             <i class="fa-solid fa-floppy-disk text-2xl"></i>
             <div class="text-left">
@@ -1296,6 +1282,9 @@
             document.getElementById('viewMarketing').classList.add('hidden');
             document.getElementById('viewClinical').classList.add('hidden');
 
+            const floatingSaveBtn = document.getElementById('floatingSaveBtn');
+            if (floatingSaveBtn) floatingSaveBtn.classList.toggle('hidden', tabName !== 'clinical');
+
             if (tabName === 'dashboard') {
                 updateDashboardData();
                 document.getElementById('viewDashboard').classList.remove('hidden');
@@ -1377,45 +1366,64 @@
             const listContainer = document.getElementById('loyaltyManagerList');
             listContainer.innerHTML = '';
 
+            const toolbar = document.createElement('div');
+            toolbar.className = 'sticky top-0 z-10 bg-amber-50 border border-amber-200 p-3 rounded-xl flex flex-wrap items-center justify-between gap-2';
+            toolbar.innerHTML = `
+                <div>
+                    <p class="font-bold text-amber-800">Pilares personalizados</p>
+                    <p class="text-[11px] text-amber-700">Agrega, edita o elimina cualquier pilar. Los cambios se guardan al pulsar “Guardar Cambios”.</p>
+                </div>
+                <button type="button" onclick="addNewLoyaltyPillar()" class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-3 py-2 rounded-lg font-bold cursor-pointer"><i class="fa-solid fa-plus"></i> Agregar pilar</button>
+            `;
+            listContainer.appendChild(toolbar);
+
+            if (!loyaltyConfig.length) {
+                const empty = document.createElement('div');
+                empty.className = 'p-8 text-center text-slate-500 bg-slate-50 border border-dashed border-slate-300 rounded-xl';
+                empty.innerHTML = 'No hay pilares de fidelización. Use “Agregar pilar” para crear el primero.';
+                listContainer.appendChild(empty);
+            }
+
             loyaltyConfig.forEach((pillar, pIdx) => {
                 const div = document.createElement('div');
-                div.className = "bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3";
-                
-                let templatesInputsHtml = pillar.templates.map((t, tIdx) => `
+                div.className = 'bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3';
+                const templates = Array.isArray(pillar.templates) && pillar.templates.length ? pillar.templates : [''];
+                pillar.templates = templates;
+                const templatesInputsHtml = templates.map((t, tIdx) => `
                     <div class="flex gap-2 items-center">
                         <input type="text" value="${escapeHtml(t)}" oninput="updatePillarTemplateText(${pIdx}, ${tIdx}, this.value)" class="flex-1 border border-slate-300 rounded-lg p-1.5 text-xs bg-white text-slate-700">
-                        <button onclick="removePillarTemplate(${pIdx}, ${tIdx})" class="text-rose-500 hover:text-rose-700 text-xs px-2 py-1 cursor-pointer"><i class="fa-solid fa-trash-can"></i></button>
+                        <button type="button" onclick="removePillarTemplate(${pIdx}, ${tIdx})" class="text-rose-500 hover:text-rose-700 text-xs px-2 py-1 cursor-pointer" title="Eliminar variación"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                 `).join('');
-
                 div.innerHTML = `
-                    <div class="flex justify-between items-center font-bold text-slate-800">
-                        <span>${pillar.name}</span>
-                        <span class="text-[10px] bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded border border-indigo-100">ID: ${pillar.id}</span>
+                    <div class="flex flex-wrap justify-between items-center gap-2">
+                        <span class="font-bold text-slate-800">Pilar #${pillar.id}</span>
+                        <button type="button" onclick="deleteLoyaltyPillar(${pIdx})" class="bg-rose-100 hover:bg-rose-200 text-rose-700 text-[11px] px-2.5 py-1.5 rounded-lg font-semibold cursor-pointer"><i class="fa-solid fa-trash-can"></i> Eliminar pilar</button>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                            <label class="block font-semibold text-slate-500 mb-1">Imagen (URL de Enlace HTTPS)</label>
-                            <input type="text" value="${pillar.imageUrl.startsWith('data:') ? '' : pillar.imageUrl}" placeholder="https://..." oninput="updatePillarImageUrl(${pIdx}, this.value)" class="w-full border border-slate-300 rounded-lg p-1.5 text-xs bg-white text-slate-700">
+                            <label class="block font-semibold text-slate-500 mb-1">Nombre del pilar</label>
+                            <input type="text" value="${escapeHtml(pillar.name || '')}" oninput="updatePillarField(${pIdx}, 'name', this.value)" class="w-full border border-slate-300 rounded-lg p-1.5 text-xs bg-white text-slate-700">
                         </div>
                         <div>
-                            <label class="block font-semibold text-slate-500 mb-1">O Subir Archivo Local (No recomendado web)</label>
-                            <input type="file" accept="image/*" onchange="uploadPillarImageFile(event, ${pIdx})" class="w-full text-[11px] text-slate-500 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-indigo-50 file:text-indigo-700 cursor-pointer">
+                            <label class="block font-semibold text-slate-500 mb-1">Categoría / Badge</label>
+                            <input type="text" value="${escapeHtml(pillar.badge || '')}" oninput="updatePillarField(${pIdx}, 'badge', this.value)" class="w-full border border-slate-300 rounded-lg p-1.5 text-xs bg-white text-slate-700">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="block font-semibold text-slate-500 mb-1">Imagen (URL HTTPS opcional)</label>
+                            <input type="text" value="${escapeHtml(String(pillar.imageUrl || '').startsWith('data:') ? '' : (pillar.imageUrl || ''))}" placeholder="https://..." oninput="updatePillarImageUrl(${pIdx}, this.value)" class="w-full border border-slate-300 rounded-lg p-1.5 text-xs bg-white text-slate-700">
                         </div>
                     </div>
                     <div class="space-y-2">
-                        <div class="flex justify-between items-center">
-                            <label class="font-semibold text-slate-500">Variaciones de Mensaje (${pillar.templates.length})</label>
-                            <button onclick="addPillarTemplate(${pIdx})" class="bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] px-2.5 py-1 rounded-md font-semibold cursor-pointer shadow-xs">+ Añadir Nueva Variación</button>
+                        <div class="flex justify-between items-center gap-2">
+                            <label class="font-semibold text-slate-500">Variaciones de mensaje (${templates.length})</label>
+                            <button type="button" onclick="addPillarTemplate(${pIdx})" class="bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] px-2.5 py-1 rounded-md font-semibold cursor-pointer">+ Añadir variación</button>
                         </div>
-                        <div class="space-y-1.5 max-h-40 overflow-y-auto pr-1">
-                            ${templatesInputsHtml}
-                        </div>
+                        <div class="space-y-1.5 max-h-40 overflow-y-auto pr-1">${templatesInputsHtml}</div>
                     </div>
                 `;
                 listContainer.appendChild(div);
             });
-
             document.getElementById('loyaltyManagerModal').classList.remove('hidden');
             document.getElementById('loyaltyManagerModal').classList.add('flex');
         }
@@ -1425,16 +1433,13 @@
             document.getElementById('loyaltyManagerModal').classList.add('hidden');
         }
 
-        function updatePillarImageUrl(pIdx, url) { if (url) loyaltyConfig[pIdx].imageUrl = url; }
+        function updatePillarImageUrl(pIdx, url) { loyaltyConfig[pIdx].imageUrl = url || ''; }
 
         function uploadPillarImageFile(event, pIdx) {
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader();
-            reader.onload = function(e) {
-                loyaltyConfig[pIdx].imageUrl = e.target.result;
-                showAlert("Imagen Cargada", "La imagen local se cargó. Recuerda que para envíos directos web es mejor usar enlaces HTTPS.");
-            };
+            reader.onload = function(e) { loyaltyConfig[pIdx].imageUrl = e.target.result; openLoyaltyManagerModal(); };
             reader.readAsDataURL(file);
         }
 
@@ -1447,8 +1452,31 @@
         }
 
         function addPillarTemplate(pIdx) {
-            loyaltyConfig[pIdx].templates.push("¡Hola [PATIENT_NAME]! Nueva variación creada para [CLINIC_NAME]. 🦷✨");
+            loyaltyConfig[pIdx].templates.push('¡Hola [PATIENT_NAME]! Nueva variación para [CLINIC_NAME].');
             openLoyaltyManagerModal();
+        }
+
+        function updatePillarField(pIdx, field, value) { loyaltyConfig[pIdx][field] = value; }
+
+        function addNewLoyaltyPillar() {
+            const nextId = loyaltyConfig.reduce((max, item) => Math.max(max, Number(item.id) || 0), 0) + 1;
+            loyaltyConfig.push({
+                id: nextId,
+                name: `${nextId}. Nuevo pilar de fidelización`,
+                badge: 'Personalizado',
+                imageUrl: '',
+                templates: ['¡Hola [PATIENT_NAME]! Tenemos una novedad de [CLINIC_NAME] para usted.']
+            });
+            openLoyaltyManagerModal();
+        }
+
+        function deleteLoyaltyPillar(pIdx) {
+            const item = loyaltyConfig[pIdx];
+            if (!item) return;
+            showConfirmModal('Eliminar pilar', `¿Desea eliminar definitivamente “${item.name || 'este pilar'}”?`, () => {
+                loyaltyConfig.splice(pIdx, 1);
+                openLoyaltyManagerModal();
+            });
         }
 
         function saveLoyaltyCustomizations() {
@@ -1565,47 +1593,66 @@
             const listContainer = document.getElementById('marketingManagerList');
             listContainer.innerHTML = '';
 
-            marketingConfig.forEach((camp, pIdx) => {
+            const toolbar = document.createElement('div');
+            toolbar.className = 'sticky top-0 z-10 bg-emerald-50 border border-emerald-200 p-3 rounded-xl flex flex-wrap items-center justify-between gap-2';
+            toolbar.innerHTML = `
+                <div>
+                    <p class="font-bold text-emerald-800">Campañas personalizadas</p>
+                    <p class="text-[11px] text-emerald-700">Agrega, edita o elimina cualquier campaña. Los cambios se guardan al pulsar “Guardar Cambios”.</p>
+                </div>
+                <button type="button" onclick="addNewMarketingCampaign()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3 py-2 rounded-lg font-bold cursor-pointer"><i class="fa-solid fa-plus"></i> Agregar campaña</button>
+            `;
+            listContainer.appendChild(toolbar);
+
+            if (!marketingConfig.length) {
+                const empty = document.createElement('div');
+                empty.className = 'p-8 text-center text-slate-500 bg-slate-50 border border-dashed border-slate-300 rounded-xl';
+                empty.innerHTML = 'No hay campañaes de fidelización. Use “Agregar campaña” para crear el primero.';
+                listContainer.appendChild(empty);
+            }
+
+            marketingConfig.forEach((pillar, pIdx) => {
                 const div = document.createElement('div');
-                div.className = "bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3";
-                
-                let templatesInputsHtml = camp.templates.map((t, tIdx) => `
+                div.className = 'bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3';
+                const templates = Array.isArray(pillar.templates) && pillar.templates.length ? pillar.templates : [''];
+                pillar.templates = templates;
+                const templatesInputsHtml = templates.map((t, tIdx) => `
                     <div class="flex gap-2 items-center">
                         <input type="text" value="${escapeHtml(t)}" oninput="updateMktTemplateText(${pIdx}, ${tIdx}, this.value)" class="flex-1 border border-slate-300 rounded-lg p-1.5 text-xs bg-white text-slate-700">
-                        <button onclick="removeMktTemplate(${pIdx}, ${tIdx})" class="text-rose-500 hover:text-rose-700 text-xs px-2 py-1 cursor-pointer"><i class="fa-solid fa-trash-can"></i></button>
+                        <button type="button" onclick="removeMktTemplate(${pIdx}, ${tIdx})" class="text-rose-500 hover:text-rose-700 text-xs px-2 py-1 cursor-pointer" title="Eliminar variación"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                 `).join('');
-
                 div.innerHTML = `
-                    <div class="flex justify-between items-center font-bold text-slate-800">
-                        <span>${camp.name}</span>
-                        <span class="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-100">ID: ${camp.id}</span>
+                    <div class="flex flex-wrap justify-between items-center gap-2">
+                        <span class="font-bold text-slate-800">Campaña #${pillar.id}</span>
+                        <button type="button" onclick="deleteMarketingCampaign(${pIdx})" class="bg-rose-100 hover:bg-rose-200 text-rose-700 text-[11px] px-2.5 py-1.5 rounded-lg font-semibold cursor-pointer"><i class="fa-solid fa-trash-can"></i> Eliminar campaña</button>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                            <label class="block font-semibold text-slate-500 mb-1">Imagen (URL de Enlace HTTPS)</label>
-                            <input type="text" value="${camp.imageUrl.startsWith('data:') ? '' : camp.imageUrl}" placeholder="https://..." oninput="updateMktImageUrl(${pIdx}, this.value)" class="w-full border border-slate-300 rounded-lg p-1.5 text-xs bg-white text-slate-700">
+                            <label class="block font-semibold text-slate-500 mb-1">Nombre del campaña</label>
+                            <input type="text" value="${escapeHtml(pillar.name || '')}" oninput="updateMktField(${pIdx}, 'name', this.value)" class="w-full border border-slate-300 rounded-lg p-1.5 text-xs bg-white text-slate-700">
                         </div>
                         <div>
-                            <label class="block font-semibold text-slate-500 mb-1">O Subir Archivo Local (No recomendado web)</label>
-                            <input type="file" accept="image/*" onchange="uploadMktImageFile(event, ${pIdx})" class="w-full text-[11px] text-slate-500 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-emerald-50 file:text-emerald-700 cursor-pointer">
+                            <label class="block font-semibold text-slate-500 mb-1">Categoría / Badge</label>
+                            <input type="text" value="${escapeHtml(pillar.badge || '')}" oninput="updateMktField(${pIdx}, 'badge', this.value)" class="w-full border border-slate-300 rounded-lg p-1.5 text-xs bg-white text-slate-700">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="block font-semibold text-slate-500 mb-1">Imagen (URL HTTPS opcional)</label>
+                            <input type="text" value="${escapeHtml(String(pillar.imageUrl || '').startsWith('data:') ? '' : (pillar.imageUrl || ''))}" placeholder="https://..." oninput="updateMktImageUrl(${pIdx}, this.value)" class="w-full border border-slate-300 rounded-lg p-1.5 text-xs bg-white text-slate-700">
                         </div>
                     </div>
                     <div class="space-y-2">
-                        <div class="flex justify-between items-center">
-                            <label class="font-semibold text-slate-500">Variaciones de Texto (${camp.templates.length})</label>
-                            <button onclick="addMktTemplate(${pIdx})" class="bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] px-2.5 py-1 rounded-md font-semibold cursor-pointer shadow-xs">+ Añadir Nueva Variación</button>
+                        <div class="flex justify-between items-center gap-2">
+                            <label class="font-semibold text-slate-500">Variaciones de mensaje (${templates.length})</label>
+                            <button type="button" onclick="addMktTemplate(${pIdx})" class="bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] px-2.5 py-1 rounded-md font-semibold cursor-pointer">+ Añadir variación</button>
                         </div>
-                        <div class="space-y-1.5 max-h-40 overflow-y-auto pr-1">
-                            ${templatesInputsHtml}
-                        </div>
+                        <div class="space-y-1.5 max-h-40 overflow-y-auto pr-1">${templatesInputsHtml}</div>
                     </div>
                 `;
                 listContainer.appendChild(div);
             });
-
-            document.getElementById('marketingManagerModal').classList.remove('hidden');
-            document.getElementById('marketingManagerModal').classList.add('flex');
+            document.getElementById('mktManagerModal').classList.remove('hidden');
+            document.getElementById('mktManagerModal').classList.add('flex');
         }
 
         function closeMarketingManagerModal() {
@@ -1613,16 +1660,13 @@
             document.getElementById('marketingManagerModal').classList.add('hidden');
         }
 
-        function updateMktImageUrl(pIdx, url) { if (url) marketingConfig[pIdx].imageUrl = url; }
+        function updateMktImageUrl(pIdx, url) { marketingConfig[pIdx].imageUrl = url || ''; }
 
         function uploadMktImageFile(event, pIdx) {
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader();
-            reader.onload = function(e) {
-                marketingConfig[pIdx].imageUrl = e.target.result;
-                showAlert("Imagen Cargada", "Imagen local guardada en la campaña de marketing.");
-            };
+            reader.onload = function(e) { marketingConfig[pIdx].imageUrl = e.target.result; openMarketingManagerModal(); };
             reader.readAsDataURL(file);
         }
 
@@ -1635,8 +1679,31 @@
         }
 
         function addMktTemplate(pIdx) {
-            marketingConfig[pIdx].templates.push("¡Promoción especial en [CLINIC_NAME]! Reserva tu cita ahora mismo. 🚀");
+            marketingConfig[pIdx].templates.push('¡Hola [PATIENT_NAME]! Tenemos una promoción especial en [CLINIC_NAME].');
             openMarketingManagerModal();
+        }
+
+        function updateMktField(pIdx, field, value) { marketingConfig[pIdx][field] = value; }
+
+        function addNewMarketingCampaign() {
+            const nextId = marketingConfig.reduce((max, item) => Math.max(max, Number(item.id) || 0), 0) + 1;
+            marketingConfig.push({
+                id: nextId,
+                name: `${nextId}. Nueva campaña de marketing`,
+                badge: 'Personalizada',
+                imageUrl: '',
+                templates: ['¡Hola [PATIENT_NAME]! Conozca esta promoción especial de [CLINIC_NAME].']
+            });
+            openMarketingManagerModal();
+        }
+
+        function deleteMarketingCampaign(pIdx) {
+            const item = marketingConfig[pIdx];
+            if (!item) return;
+            showConfirmModal('Eliminar campaña', `¿Desea eliminar definitivamente “${item.name || 'esta campaña'}”?`, () => {
+                marketingConfig.splice(pIdx, 1);
+                openMarketingManagerModal();
+            });
         }
 
         function saveMarketingCustomizations() {
@@ -2406,53 +2473,27 @@
 
         function applyCustomLogoToUI() {
             const logo = appSettings.customLogo || '';
-            [
-                ['customHeaderLogo', 'defaultHeaderIcon'],
-                ['customPrintLogo', 'defaultPrintIcon'],
-                ['settingsLogoPreview', 'settingsDefaultLogoIcon']
-            ].forEach(([imgId, iconId]) => {
-                const img = document.getElementById(imgId);
-                const icon = document.getElementById(iconId);
-                if (!img || !icon) return;
-                if (logo) {
-                    img.src = logo;
-                    img.classList.remove('hidden');
-                    icon.classList.add('hidden');
-                } else {
-                    img.removeAttribute('src');
-                    img.classList.add('hidden');
-                    icon.classList.remove('hidden');
-                }
+            [['customHeaderLogo', 'headerLogoContainer'], ['customPrintLogo', 'printLogoContainer'], ['settingsLogoPreview', 'settingsLogoContainer']].forEach(([imageId, containerId]) => {
+                const image = document.getElementById(imageId);
+                const container = document.getElementById(containerId);
+                if (!image || !container) return;
+                if (logo) { image.src = logo; image.classList.remove('hidden'); container.classList.remove('hidden'); container.classList.add('flex'); }
+                else { image.removeAttribute('src'); image.classList.add('hidden'); container.classList.add('hidden'); container.classList.remove('flex'); }
             });
         }
 
         function handleLogoFileChange(event) {
             const file = event.target.files?.[0];
             if (!file) return;
-            if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) {
-                event.target.value = '';
-                showAlert('Archivo no válido', 'Seleccione un logo PNG, JPG o WEBP.');
-                return;
-            }
-            if (file.size > 2 * 1024 * 1024) {
-                event.target.value = '';
-                showAlert('Logo demasiado grande', 'El logo no puede superar los 2 MB.');
-                return;
-            }
+            if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) { event.target.value = ''; showAlert('Archivo no válido', 'Seleccione un logo PNG, JPG o WEBP.'); return; }
+            if (file.size > 2 * 1024 * 1024) { event.target.value = ''; showAlert('Logo demasiado grande', 'El logo no puede superar los 2 MB.'); return; }
             const reader = new FileReader();
-            reader.onload = () => {
-                appSettings.customLogo = reader.result;
-                applyCustomLogoToUI();
-            };
-            reader.onerror = () => showAlert('Error', 'No se pudo leer el logo.');
+            reader.onload = () => { appSettings.customLogo = reader.result; applyCustomLogoToUI(); };
+            reader.onerror = () => showAlert('Error', 'No se pudo leer el logo seleccionado.');
             reader.readAsDataURL(file);
         }
 
-        function removeCustomLogo() {
-            appSettings.customLogo = '';
-            document.getElementById('settingLogoFile').value = '';
-            applyCustomLogoToUI();
-        }
+        function removeCustomLogo() { appSettings.customLogo = ''; document.getElementById('settingLogoFile').value = ''; applyCustomLogoToUI(); }
 
         function renderStateSelectDropdown() {
             const dropdown = document.getElementById('stateSelectDropdown');
@@ -2922,68 +2963,24 @@
             });
         }
 
-        const BACKUP_STORAGE_KEYS = [
-            SETTINGS_KEY,
-            CURRENT_PATIENT_KEY,
-            ALL_PATIENTS_KEY,
-            APPOINTMENTS_KEY,
-            LOYALTY_CONFIG_KEY,
-            MARKETING_CONFIG_KEY
-        ];
+        const BACKUP_STORAGE_KEYS = [SETTINGS_KEY, CURRENT_PATIENT_KEY, ALL_PATIENTS_KEY, APPOINTMENTS_KEY, LOYALTY_CONFIG_KEY, MARKETING_CONFIG_KEY];
 
         function exportFullDatabase() {
             try {
                 savePatientData();
                 executeStorageSave();
                 const data = {};
-                BACKUP_STORAGE_KEYS.forEach(key => {
-                    data[key] = localStorage.getItem(key);
-                });
-                data[SETTINGS_KEY] = JSON.stringify({
-                    ...appSettings,
-                    clinicName: document.getElementById('settingClinicName').value || appSettings.clinicName,
-                    currencySymbol: document.getElementById('settingCurrency').value || appSettings.currencySymbol
-                });
-                const backup = {
-                    app: 'OdontoFlow Studio Pro',
-                    formatVersion: 1,
-                    exportedAt: new Date().toISOString(),
-                    data
-                };
+                BACKUP_STORAGE_KEYS.forEach(key => { data[key] = localStorage.getItem(key); });
+                data[SETTINGS_KEY] = JSON.stringify({ ...appSettings, clinicName: document.getElementById('settingClinicName').value || appSettings.clinicName, currencySymbol: document.getElementById('settingCurrency').value || appSettings.currencySymbol });
+                const backup = { app: 'OdontoFlow Studio Pro', formatVersion: 1, exportedAt: new Date().toISOString(), data };
                 const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
                 const url = URL.createObjectURL(blob);
-                const anchor = document.createElement('a');
-                anchor.href = url;
-                anchor.download = `odontoflow_respaldo_${new Date().toISOString().slice(0, 10)}.json`;
-                document.body.appendChild(anchor);
-                anchor.click();
-                anchor.remove();
-                setTimeout(() => URL.revokeObjectURL(url), 1000);
-                showAlert('Respaldo generado', 'Se descargó el archivo JSON con todos los datos de la app. Guárdelo en un lugar seguro.');
-            } catch (error) {
-                showAlert('Error al exportar', 'No se pudo generar el respaldo. Compruebe el almacenamiento disponible.');
-            }
-        }
-
-        function validateBackup(backup) {
-            if (!backup || backup.app !== 'OdontoFlow Studio Pro' || backup.formatVersion !== 1 ||
-                !backup.data || typeof backup.data !== 'object' || Array.isArray(backup.data) ||
-                !BACKUP_STORAGE_KEYS.every(key => Object.prototype.hasOwnProperty.call(backup.data, key))) {
-                throw new Error('Respaldo incompleto o incompatible.');
-            }
-            const data = {};
-            BACKUP_STORAGE_KEYS.forEach(key => {
-                const raw = backup.data[key];
-                if (raw !== null && typeof raw !== 'string') throw new Error('Formato no válido.');
-                data[key] = raw;
-                if (raw !== null) {
-                    const parsed = JSON.parse(raw);
-                    if (key === SETTINGS_KEY && (!parsed || typeof parsed !== 'object' || Array.isArray(parsed))) throw new Error('Ajustes inválidos.');
-                    if ([ALL_PATIENTS_KEY, APPOINTMENTS_KEY, LOYALTY_CONFIG_KEY, MARKETING_CONFIG_KEY].includes(key) && !Array.isArray(parsed)) throw new Error('Listado inválido.');
-                    if (key === CURRENT_PATIENT_KEY && (!parsed || typeof parsed !== 'object' || Array.isArray(parsed))) throw new Error('Ficha inválida.');
-                }
-            });
-            return data;
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `odontoflow_respaldo_${new Date().toISOString().slice(0, 10)}.json`;
+                document.body.appendChild(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+                showAlert('Respaldo generado', 'Se descargó la copia completa de la aplicación.');
+            } catch (error) { showAlert('Error al exportar', 'No se pudo generar la copia de seguridad.'); }
         }
 
         function handleDatabaseImport(event) {
@@ -2992,47 +2989,23 @@
             if (!file) return;
             const reader = new FileReader();
             reader.onload = () => {
-                let data;
+                let backup;
                 try {
-                    data = validateBackup(JSON.parse(reader.result));
-                } catch (error) {
-                    showAlert('Respaldo no válido', error.message || 'Seleccione un respaldo exportado por esta app.');
-                    return;
-                }
-                showConfirmModal(
-                    'Reemplazar toda la base de datos',
-                    'Esto reemplazará todos los pacientes, citas, campañas, fidelización, ajustes y logo de este navegador. ¿Desea continuar?',
-                    () => importFullDatabase(data)
-                );
+                    backup = JSON.parse(reader.result);
+                    if (!backup || backup.app !== 'OdontoFlow Studio Pro' || backup.formatVersion !== 1 || !backup.data || !BACKUP_STORAGE_KEYS.every(key => Object.prototype.hasOwnProperty.call(backup.data, key))) throw new Error();
+                    BACKUP_STORAGE_KEYS.forEach(key => { if (backup.data[key] !== null && typeof backup.data[key] !== 'string') throw new Error(); if (backup.data[key] !== null) JSON.parse(backup.data[key]); });
+                } catch (error) { showAlert('Respaldo no válido', 'Seleccione un archivo JSON exportado por esta aplicación.'); return; }
+                showConfirmModal('Importar base completa', 'La importación reemplazará pacientes, citas, campañas, fidelización, ajustes y logo guardados en este navegador. ¿Desea continuar?', () => importFullDatabase(backup.data));
             };
-            reader.onerror = () => showAlert('Error de lectura', 'No se pudo leer el archivo seleccionado.');
+            reader.onerror = () => showAlert('Error', 'No se pudo leer el archivo seleccionado.');
             reader.readAsText(file, 'UTF-8');
         }
 
         function importFullDatabase(data) {
-            const previous = {};
             try {
-                BACKUP_STORAGE_KEYS.forEach(key => {
-                    previous[key] = localStorage.getItem(key);
-                });
-                BACKUP_STORAGE_KEYS.forEach(key => {
-                    if (data[key] === null) localStorage.removeItem(key);
-                    else localStorage.setItem(key, data[key]);
-                });
-            } catch (error) {
-                try {
-                    BACKUP_STORAGE_KEYS.forEach(key => {
-                        if (previous[key] === null) localStorage.removeItem(key);
-                        else if (previous[key] !== undefined) localStorage.setItem(key, previous[key]);
-                    });
-                } catch (rollbackError) {
-                    showAlert('Error grave', 'No se completó la importación ni la recuperación automática. Restaure manualmente el respaldo anterior.');
-                    return;
-                }
-                showAlert('Importación cancelada', 'No se pudo guardar todo el respaldo. Los datos anteriores fueron restaurados.');
-                return;
-            }
-            window.location.reload();
+                BACKUP_STORAGE_KEYS.forEach(key => { if (data[key] === null) localStorage.removeItem(key); else localStorage.setItem(key, data[key]); });
+                window.location.reload();
+            } catch (error) { showAlert('Error al importar', 'No se pudo guardar toda la información del respaldo.'); }
         }
 
         function openSettingsModal() {
@@ -3049,13 +3022,6 @@
         function closeSettingsModal() {
             document.getElementById('settingsModal').classList.remove('flex');
             document.getElementById('settingsModal').classList.add('hidden');
-            loadSettingsFromStorage();
-            applySettingsToUI();
-            renderStateSelectDropdown();
-            renderArches();
-            renderFindingsTable();
-            renderBudgetTable();
-            updateTotals();
         }
 
         function renderSettingsStatesList() {
