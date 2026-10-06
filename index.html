@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="es" class="h-full bg-slate-100">
+
+<html class="h-full bg-slate-100" lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OdontoFlow Studio Pro - Suite Clínica Odontológica Integral</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OdontoFlow Studio Pro - Suite Clínica Odontológica Integral</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
         @media print {
             html, body, main {
                 height: auto !important;
@@ -54,1020 +54,935 @@
     </style>
 </head>
 <body class="h-full flex flex-col font-sans text-slate-800 antialiased">
-
-    <header class="no-print bg-indigo-700 text-white shadow-lg p-4 flex flex-wrap justify-between items-center gap-4">
-        <div class="flex items-center space-x-3">
-            <div id="headerLogoContainer" class="hidden bg-white/10 p-2 rounded-xl items-center justify-center min-w-10 min-h-10 max-w-12 max-h-12 overflow-hidden">
-                <img id="customHeaderLogo" class="hidden max-h-10 object-contain" alt="Logo de la clínica">
-            </div>
-            <div>
-                <h1 id="appTitleDisplay" class="text-xl font-bold tracking-tight">OdontoFlow Studio Pro</h1>
-                <p class="text-xs text-indigo-200 flex items-center gap-2">
-                    <span>Gestión Clínica Odontológica Integral</span>
-                    <span id="cloudSyncBadge" class="bg-indigo-500 text-white text-[10px] px-2 py-0.5 rounded-full font-semibold flex items-center gap-1">
-                        <i class="fa-solid fa-hard-drive"></i> Modo Local Activo
+<header class="no-print bg-indigo-700 text-white shadow-lg p-4 flex flex-wrap justify-between items-center gap-4">
+<div class="flex items-center space-x-3">
+<div class="hidden bg-white/10 p-2 rounded-xl items-center justify-center min-w-10 min-h-10 max-w-12 max-h-12 overflow-hidden" id="headerLogoContainer">
+<img alt="Logo de la clínica" class="hidden max-h-10 object-contain" id="customHeaderLogo"/>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight" id="appTitleDisplay">OdontoFlow Studio Pro</h1>
+<p class="text-xs text-indigo-200 flex items-center gap-2">
+<span>Gestión Clínica Odontológica Integral</span>
+<span class="bg-indigo-500 text-white text-[10px] px-2 py-0.5 rounded-full font-semibold flex items-center gap-1" id="cloudSyncBadge">
+<i class="fa-solid fa-hard-drive"></i> Modo Local Activo
                     </span>
-                </p>
-            </div>
-        </div>
-        
-        <div class="flex items-center flex-wrap gap-2">
-            <button onclick="switchTab('dashboard')" class="bg-indigo-800 hover:bg-indigo-900 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer">
-                <i class="fa-solid fa-chart-pie"></i>
-                <span>Dashboard</span>
-            </button>
-            <button onclick="switchTab('clinical')" class="bg-indigo-800 hover:bg-indigo-900 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer">
-                <i class="fa-solid fa-notes-medical"></i>
-                <span>Ficha</span>
-            </button>
-            <button onclick="switchTab('agenda')" class="bg-indigo-800 hover:bg-indigo-900 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer">
-                <i class="fa-solid fa-calendar-days"></i>
-                <span>Agenda</span>
-            </button>
-            <button onclick="switchTab('loyalty')" class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer">
-                <i class="fa-solid fa-award"></i>
-                <span>Fidelización (60)</span>
-            </button>
-            <button onclick="switchTab('marketing')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer animate-pulse">
-                <i class="fa-solid fa-bullhorn"></i>
-                <span>Marketing WA (60)</span>
-            </button>
-            <button onclick="openPatientListModal()" class="bg-indigo-800 hover:bg-indigo-900 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer">
-                <i class="fa-solid fa-folder-open"></i>
-                <span>Pacientes</span>
-            </button>
-            <button onclick="openConsentModal()" class="bg-indigo-800 hover:bg-indigo-900 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer">
-                <i class="fa-solid fa-file-signature"></i>
-                <span>Consentimientos</span>
-            </button>
-            <button onclick="openSettingsModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer">
-                <i class="fa-solid fa-sliders"></i>
-                <span>Ajustes</span>
-            </button>
-            <button onclick="printClinicalHistoryOnly()" class="bg-emerald-800 hover:bg-emerald-900 text-white text-xs px-3 py-2 rounded-xl font-medium transition flex items-center gap-1 shadow-xs cursor-pointer" title="Imprimir Historia Clínica y Odontograma">
-                <i class="fa-solid fa-file-medical"></i>
-                <span>Imprimir HC</span>
-            </button>
-            <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-900 text-white text-xs px-3 py-2 rounded-xl font-medium transition flex items-center gap-1 shadow-xs cursor-pointer" title="Imprimir Informe con Odontograma y Presupuesto">
-                <i class="fa-solid fa-print"></i>
-                <span>Imprimir presupuesto</span>
-            </button>
-            <button onclick="sendWhatsApp()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer">
-                <i class="fa-brands fa-whatsapp text-sm"></i>
-            </button>
-            <button onclick="confirmResetPatient()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-3 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer">
-                <i class="fa-solid fa-plus"></i>
-                <span>Nuevo</span>
-            </button>
-        </div>
-    </header>
+</p>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2">
+<button class="bg-indigo-800 hover:bg-indigo-900 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="switchTab('dashboard')">
+<i class="fa-solid fa-chart-pie"></i>
+<span>Dashboard</span>
+</button>
+<button class="bg-indigo-800 hover:bg-indigo-900 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="switchTab('clinical')">
+<i class="fa-solid fa-notes-medical"></i>
+<span>Ficha</span>
+</button>
+<button class="bg-indigo-800 hover:bg-indigo-900 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="switchTab('agenda')">
+<i class="fa-solid fa-calendar-days"></i>
+<span>Agenda</span>
+</button>
+<button class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="switchTab('loyalty')">
+<i class="fa-solid fa-award"></i>
+<span>Fidelización (60)</span>
+</button>
 
-    <main class="flex-1 max-w-7xl w-full mx-auto p-3 md:p-6 overflow-y-auto">
+<button class="bg-indigo-800 hover:bg-indigo-900 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="openPatientListModal()">
+<i class="fa-solid fa-folder-open"></i>
+<span>Pacientes</span>
+</button>
 
-        <!-- VISTA 1: DASHBOARD DE CONTROL -->
-        <div id="viewDashboard" class="hidden space-y-6 no-print">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
-                    <div>
-                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Pacientes</p>
-                        <h3 class="text-2xl font-bold text-slate-800 mt-1" id="dashTotalPatients">0</h3>
-                    </div>
-                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-xl">
-                        <i class="fa-solid fa-users"></i>
-                    </div>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
-                    <div>
-                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Presupuestado Total</p>
-                        <h3 class="text-2xl font-bold text-emerald-600 mt-1"><span class="currencySymbolDisplay">$</span><span id="dashTotalBudget">0.00</span></h3>
-                    </div>
-                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-xl">
-                        <i class="fa-solid fa-sack-dollar"></i>
-                    </div>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
-                    <div>
-                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Citas Programadas</p>
-                        <h3 class="text-2xl font-bold text-indigo-600 mt-1" id="dashTotalAppointments">0</h3>
-                    </div>
-                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-xl">
-                        <i class="fa-solid fa-calendar-check"></i>
-                    </div>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
-                    <div>
-                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Campañas Activas</p>
-                        <h3 class="text-2xl font-bold text-amber-600 mt-1">120</h3>
-                    </div>
-                    <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center text-xl">
-                        <i class="fa-solid fa-bullhorn"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2">
-                                <i class="fa-solid fa-clock-rotate-left text-indigo-600"></i> Pacientes Recientes
+<button class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="openSettingsModal()">
+<i class="fa-solid fa-sliders"></i>
+<span>Ajustes</span>
+</button>
+<button class="bg-emerald-800 hover:bg-emerald-900 text-white text-xs px-3 py-2 rounded-xl font-medium transition flex items-center gap-1 shadow-xs cursor-pointer" onclick="printClinicalHistoryOnly()" title="Imprimir Historia Clínica y Odontograma">
+<i class="fa-solid fa-print"></i>
+<span>HC</span>
+</button>
+<button class="bg-slate-800 hover:bg-slate-900 text-white text-xs px-3 py-2 rounded-xl font-medium transition flex items-center gap-1 shadow-xs cursor-pointer" onclick="window.print()" title="Imprimir Informe con Odontograma y Presupuesto">
+<i class="fa-solid fa-print"></i>
+<span>Presupuesto</span>
+</button>
+<button class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="sendWhatsApp()">
+<i class="fa-brands fa-whatsapp text-sm"></i>
+</button>
+<button class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-3 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="confirmResetPatient()">
+<i class="fa-solid fa-plus"></i>
+<span>Nuevo</span>
+</button>
+</div>
+</header>
+<main class="flex-1 max-w-7xl w-full mx-auto p-3 md:p-6 overflow-y-auto">
+<!-- VISTA 1: DASHBOARD DE CONTROL -->
+<div class="hidden space-y-6 no-print" id="viewDashboard">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
+<div>
+<p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Pacientes</p>
+<h3 class="text-2xl font-bold text-slate-800 mt-1" id="dashTotalPatients">0</h3>
+</div>
+<div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-xl">
+<i class="fa-solid fa-users"></i>
+</div>
+</div>
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
+<div>
+<p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Presupuestado Total</p>
+<h3 class="text-2xl font-bold text-emerald-600 mt-1"><span class="currencySymbolDisplay">$</span><span id="dashTotalBudget">0.00</span></h3>
+</div>
+<div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-xl">
+<i class="fa-solid fa-sack-dollar"></i>
+</div>
+</div>
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
+<div>
+<p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Citas Programadas</p>
+<h3 class="text-2xl font-bold text-indigo-600 mt-1" id="dashTotalAppointments">0</h3>
+</div>
+<div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-xl">
+<i class="fa-solid fa-calendar-check"></i>
+</div>
+</div>
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
+<div>
+<p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Campañas Activas</p>
+<h3 class="text-2xl font-bold text-amber-600 mt-1">120</h3>
+</div>
+<div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center text-xl">
+<i class="fa-solid fa-bullhorn"></i>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+<i class="fa-solid fa-clock-rotate-left text-indigo-600"></i> Pacientes Recientes
                             </h3>
-                            <button onclick="openPatientListModal()" class="text-xs font-semibold text-indigo-600 hover:underline cursor-pointer">Ver Todos</button>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-xs">
-                                <thead>
-                                    <tr class="text-slate-400 border-b border-slate-100">
-                                        <th class="pb-2">HC</th>
-                                        <th class="pb-2">Nombre</th>
-                                        <th class="pb-2">Teléfono</th>
-                                        <th class="pb-2 text-right">Acción</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="dashRecentPatientsBody" class="divide-y divide-slate-50">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-sm font-bold text-slate-800 mb-3 flex items-center gap-2">
-                            <i class="fa-solid fa-bolt text-amber-500"></i> Accesos Rápidos de Gestión
+<button class="text-xs font-semibold text-indigo-600 hover:underline cursor-pointer" onclick="openPatientListModal()">Ver Todos</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead>
+<tr class="text-slate-400 border-b border-slate-100">
+<th class="pb-2">HC</th>
+<th class="pb-2">Nombre</th>
+<th class="pb-2">Teléfono</th>
+<th class="pb-2 text-right">Acción</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-50" id="dashRecentPatientsBody">
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
+<div>
+<h3 class="text-sm font-bold text-slate-800 mb-3 flex items-center gap-2">
+<i class="fa-solid fa-bolt text-amber-500"></i> Accesos Rápidos de Gestión
                         </h3>
-                        <div class="grid grid-cols-2 gap-3">
-                            <button onclick="switchTab('agenda')" class="p-4 rounded-xl border border-indigo-100 bg-indigo-50/50 hover:bg-indigo-100/50 transition text-left cursor-pointer">
-                                <i class="fa-solid fa-calendar-days text-indigo-600 text-lg mb-2 block"></i>
-                                <span class="text-xs font-bold text-slate-800 block">Agenda de Citas</span>
-                                <span class="text-[10px] text-slate-500">Programar y recordar</span>
-                            </button>
-                            <button onclick="switchTab('marketing')" class="p-4 rounded-xl border border-emerald-100 bg-emerald-50/50 hover:bg-emerald-100/50 transition text-left cursor-pointer">
-                                <i class="fa-solid fa-bullhorn text-emerald-600 text-lg mb-2 block"></i>
-                                <span class="text-xs font-bold text-slate-800 block">Marketing (60)</span>
-                                <span class="text-[10px] text-slate-500">Campañas conversiones</span>
-                            </button>
-                            <button onclick="switchTab('loyalty')" class="p-4 rounded-xl border border-amber-100 bg-amber-50/50 hover:bg-amber-100/50 transition text-left cursor-pointer">
-                                <i class="fa-solid fa-award text-amber-600 text-lg mb-2 block"></i>
-                                <span class="text-xs font-bold text-slate-800 block">Fidelización (60)</span>
-                                <span class="text-[10px] text-slate-500">Retención de pacientes</span>
-                            </button>
-                            <button onclick="openSettingsModal()" class="p-4 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 transition text-left cursor-pointer">
-                                <i class="fa-solid fa-sliders text-slate-600 text-lg mb-2 block"></i>
-                                <span class="text-xs font-bold text-slate-800 block">Configurar Tarifario</span>
-                                <span class="text-[10px] text-slate-500">Precios y clínica</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- VISTA 2: AGENDA DE CITAS Y RECORDATORIOS WHATSAPP -->
-        <div id="viewAgenda" class="hidden space-y-6 no-print">
-            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-                <div class="flex justify-between items-center mb-4">
-                    <div>
-                        <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-calendar-days text-indigo-600"></i> Agenda de Citas Odontológicas
+<div class="grid grid-cols-2 gap-3">
+<button class="p-4 rounded-xl border border-indigo-100 bg-indigo-50/50 hover:bg-indigo-100/50 transition text-left cursor-pointer" onclick="switchTab('agenda')">
+<i class="fa-solid fa-calendar-days text-indigo-600 text-lg mb-2 block"></i>
+<span class="text-xs font-bold text-slate-800 block">Agenda de Citas</span>
+<span class="text-[10px] text-slate-500">Programar y recordar</span>
+</button>
+<button class="p-4 rounded-xl border border-emerald-100 bg-emerald-50/50 hover:bg-emerald-100/50 transition text-left cursor-pointer" onclick="switchTab('marketing')">
+<i class="fa-solid fa-bullhorn text-emerald-600 text-lg mb-2 block"></i>
+<span class="text-xs font-bold text-slate-800 block">Marketing (60)</span>
+<span class="text-[10px] text-slate-500">Campañas conversiones</span>
+</button>
+<button class="p-4 rounded-xl border border-amber-100 bg-amber-50/50 hover:bg-amber-100/50 transition text-left cursor-pointer" onclick="switchTab('loyalty')">
+<i class="fa-solid fa-award text-amber-600 text-lg mb-2 block"></i>
+<span class="text-xs font-bold text-slate-800 block">Fidelización (60)</span>
+<span class="text-[10px] text-slate-500">Retención de pacientes</span>
+</button>
+<button class="p-4 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 transition text-left cursor-pointer" onclick="openSettingsModal()">
+<i class="fa-solid fa-sliders text-slate-600 text-lg mb-2 block"></i>
+<span class="text-xs font-bold text-slate-800 block">Configurar Tarifario</span>
+<span class="text-[10px] text-slate-500">Precios y clínica</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- VISTA 2: AGENDA DE CITAS Y RECORDATORIOS WHATSAPP -->
+<div class="hidden space-y-6 no-print" id="viewAgenda">
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+<div class="flex justify-between items-center mb-4">
+<div>
+<h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+<i class="fa-solid fa-calendar-days text-indigo-600"></i> Agenda de Citas Odontológicas
                         </h2>
-                        <p class="text-xs text-slate-400">Programe citas y envíe recordatorios instantáneos por WhatsApp con 1 clic.</p>
-                    </div>
-                    <button onclick="openNewAppointmentModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs px-4 py-2 rounded-xl font-bold flex items-center gap-1.5 cursor-pointer shadow-xs">
-                        <i class="fa-solid fa-plus"></i> Nueva Cita
+<p class="text-xs text-slate-400">Programe citas y envíe recordatorios instantáneos por WhatsApp con 1 clic.</p>
+</div>
+<button class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs px-4 py-2 rounded-xl font-bold flex items-center gap-1.5 cursor-pointer shadow-xs" onclick="openNewAppointmentModal()">
+<i class="fa-solid fa-plus"></i> Nueva Cita
                     </button>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-4">
-                        <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Filtrar Citas</h3>
-                        <div>
-                            <label class="block text-[11px] font-medium text-slate-500 mb-1">Fecha Específica</label>
-                            <input type="date" id="filterDateInput" onchange="renderAppointmentsList()" class="w-full border border-slate-300 rounded-lg p-2 text-xs bg-white outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-medium text-slate-500 mb-1">Estado de Cita</label>
-                            <select id="filterStatusSelect" onchange="renderAppointmentsList()" class="w-full border border-slate-300 rounded-lg p-2 text-xs bg-white outline-none">
-                                <option value="">Todas las Citas</option>
-                                <option value="Programada">Programada</option>
-                                <option value="Confirmada">Confirmada</option>
-                                <option value="Completada">Completada</option>
-                                <option value="Cancelada">Cancelada</option>
-                            </select>
-                        </div>
-                        <button onclick="resetAgendaFilters()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs py-2 rounded-lg font-semibold cursor-pointer">
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-4">
+<h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Filtrar Citas</h3>
+<div>
+<label class="block text-[11px] font-medium text-slate-500 mb-1">Fecha Específica</label>
+<input class="w-full border border-slate-300 rounded-lg p-2 text-xs bg-white outline-none" id="filterDateInput" onchange="renderAppointmentsList()" type="date"/>
+</div>
+<div>
+<label class="block text-[11px] font-medium text-slate-500 mb-1">Estado de Cita</label>
+<select class="w-full border border-slate-300 rounded-lg p-2 text-xs bg-white outline-none" id="filterStatusSelect" onchange="renderAppointmentsList()">
+<option value="">Todas las Citas</option>
+<option value="Programada">Programada</option>
+<option value="Confirmada">Confirmada</option>
+<option value="Completada">Completada</option>
+<option value="Cancelada">Cancelada</option>
+</select>
+</div>
+<button class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs py-2 rounded-lg font-semibold cursor-pointer" onclick="resetAgendaFilters()">
                             Limpiar Filtros
                         </button>
-                    </div>
-
-                    <div class="lg:col-span-2 overflow-x-auto">
-                        <table class="w-full text-left text-xs border-collapse">
-                            <thead>
-                                <tr class="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200 text-[11px]">
-                                    <th class="py-2.5 px-3">Fecha y Hora</th>
-                                    <th class="py-2.5 px-3">Paciente & Teléfono</th>
-                                    <th class="py-2.5 px-3">Motivo / Tratamiento</th>
-                                    <th class="py-2.5 px-3 text-center">Estado</th>
-                                    <th class="py-2.5 px-3 text-right">Acciones WhatsApp</th>
-                                </tr>
-                            </thead>
-                            <tbody id="appointmentsTableBody" class="divide-y divide-slate-100">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- VISTA 3: MÓDULO DE FIDELIZACIÓN (60 PILARES) -->
-        <div id="viewLoyalty" class="hidden space-y-6 no-print">
-            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
-                <div>
-                    <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2 mb-1">
-                        <i class="fa-solid fa-award text-amber-500"></i> Suite de Fidelización & Retención (60 Estrategias)
+</div>
+<div class="lg:col-span-2 overflow-x-auto">
+<table class="w-full text-left text-xs border-collapse">
+<thead>
+<tr class="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200 text-[11px]">
+<th class="py-2.5 px-3">Fecha y Hora</th>
+<th class="py-2.5 px-3">Paciente &amp; Teléfono</th>
+<th class="py-2.5 px-3">Motivo / Tratamiento</th>
+<th class="py-2.5 px-3 text-center">Estado</th>
+<th class="py-2.5 px-3 text-right">Acciones WhatsApp</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100" id="appointmentsTableBody">
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<!-- VISTA 3: MÓDULO DE FIDELIZACIÓN (60 PILARES) -->
+<div class="hidden space-y-6 no-print" id="viewLoyalty"><div class="bg-white rounded-xl p-3 flex flex-wrap gap-2"><button class="px-4 py-2 rounded-lg bg-amber-600 text-white text-sm" id="loyaltyRetentionTab" onclick="showLoyaltySection('retention')" type="button">Fidelización (60)</button><button class="px-4 py-2 rounded-lg bg-slate-100 text-slate-700 text-sm" id="loyaltyMarketingTab" onclick="showLoyaltySection('marketing')" type="button">Marketing (60)</button></div><div class="space-y-6" id="loyaltyRetentionContent">
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+<div>
+<h2 class="text-sm font-bold text-slate-800 flex items-center gap-2 mb-1">
+<i class="fa-solid fa-award text-amber-500"></i> Suite de Fidelización &amp; Retención (60 Estrategias)
                     </h2>
-                    <p class="text-xs text-slate-400">Personaliza y envía campañas de mantenimiento y fidelización directas a WhatsApp.</p>
-                </div>
-                <div class="flex items-center gap-3 w-full sm:w-auto">
-                    <div class="relative w-full sm:w-64">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
-                        <input type="text" id="searchLoyaltyInput" oninput="renderLoyaltyCards()" placeholder="Buscar por nombre o especialidad..." class="w-full border border-slate-300 rounded-xl pl-8 pr-3 py-2 text-xs outline-none focus:ring-2 focus:ring-amber-500">
-                    </div>
-                    <button onclick="openLoyaltyManagerModal()" class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-4 py-2 rounded-xl font-bold flex items-center gap-2 cursor-pointer shadow-sm whitespace-nowrap">
-                        <i class="fa-solid fa-sliders"></i> Gestionar 60 Pilares
+<p class="text-xs text-slate-400">Personaliza y envía campañas de mantenimiento y fidelización directas a WhatsApp.</p>
+</div>
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<div class="relative w-full sm:w-64">
+<i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+<input class="w-full border border-slate-300 rounded-xl pl-8 pr-3 py-2 text-xs outline-none focus:ring-2 focus:ring-amber-500" id="searchLoyaltyInput" oninput="renderLoyaltyCards()" placeholder="Buscar por nombre o especialidad..." type="text"/>
+</div>
+<button class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-4 py-2 rounded-xl font-bold flex items-center gap-2 cursor-pointer shadow-sm whitespace-nowrap" onclick="openLoyaltyManagerModal()">
+<i class="fa-solid fa-sliders"></i> Gestionar 60 Pilares
                     </button>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="loyaltyCardsGrid">
-            </div>
-        </div>
-
-        <!-- VISTA 4: MÓDULO DE MARKETING WHATSAPP (60 CAMPAÑAS ESPECIALIZADAS) -->
-        <div id="viewMarketing" class="hidden space-y-6 no-print">
-            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
-                <div>
-                    <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2 mb-1">
-                        <i class="fa-solid fa-bullhorn text-emerald-600"></i> Campañas de Marketing WhatsApp (60 Estrategias)
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="loyaltyCardsGrid">
+</div>
+</div><div class="hidden space-y-6 no-print" id="viewMarketing">
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+<div>
+<h2 class="text-sm font-bold text-slate-800 flex items-center gap-2 mb-1">
+<i class="fa-solid fa-bullhorn text-emerald-600"></i> Campañas de Marketing WhatsApp (60 Estrategias)
                     </h2>
-                    <p class="text-xs text-slate-400">Estrategias de conversión diseñadas para generar consultas y agendar citas.</p>
-                </div>
-                <div class="flex items-center gap-3 w-full sm:w-auto">
-                    <div class="relative w-full sm:w-64">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
-                        <input type="text" id="searchMarketingInput" oninput="renderMarketingCards()" placeholder="Buscar campaña por especialidad..." class="w-full border border-slate-300 rounded-xl pl-8 pr-3 py-2 text-xs outline-none focus:ring-2 focus:ring-emerald-500">
-                    </div>
-                    <button onclick="openMarketingManagerModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-4 py-2 rounded-xl font-bold flex items-center gap-2 cursor-pointer shadow-sm whitespace-nowrap">
-                        <i class="fa-solid fa-sliders"></i> Gestionar 60 Campañas
+<p class="text-xs text-slate-400">Estrategias de conversión diseñadas para generar consultas y agendar citas.</p>
+</div>
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<div class="relative w-full sm:w-64">
+<i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+<input class="w-full border border-slate-300 rounded-xl pl-8 pr-3 py-2 text-xs outline-none focus:ring-2 focus:ring-emerald-500" id="searchMarketingInput" oninput="renderMarketingCards()" placeholder="Buscar campaña por especialidad..." type="text"/>
+</div>
+<button class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-4 py-2 rounded-xl font-bold flex items-center gap-2 cursor-pointer shadow-sm whitespace-nowrap" onclick="openMarketingManagerModal()">
+<i class="fa-solid fa-sliders"></i> Gestionar 60 Campañas
                     </button>
-                </div>
-            </div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="marketingCardsGrid">
+</div>
+</div></div>
+<!-- VISTA 4: MÓDULO DE MARKETING WHATSAPP (60 CAMPAÑAS ESPECIALIZADAS) -->
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="marketingCardsGrid">
-            </div>
-        </div>
-
-        <!-- VISTA 5: FICHA CLÍNICA, ODONTOGRAMA & ANAMNESIS -->
-        <div id="viewClinical" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            
-            <!-- PANEL IZQUIERDO: ANAMNESIS & DATOS -->
-            <div class="lg:col-span-4 flex flex-col gap-5 no-print">
-                
-                <!-- DATOS DE FILIACIÓN -->
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-                    <div class="flex justify-between items-center mb-3">
-                        <h2 class="text-sm font-bold text-slate-700 flex items-center gap-2">
-                            <i class="fa-solid fa-id-card text-indigo-600"></i> Filiación y Datos Personales
+<!-- VISTA 5: FICHA CLÍNICA, ODONTOGRAMA & ANAMNESIS -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6" id="viewClinical">
+<!-- PANEL IZQUIERDO: ANAMNESIS & DATOS -->
+<div class="lg:col-span-4 flex flex-col gap-5 no-print"><div class="bg-white p-4 rounded-2xl border border-slate-200"><h2 class="text-sm font-bold mb-3">Documentos del paciente</h2><button class="bg-indigo-800 hover:bg-indigo-900 text-white text-xs px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="openConsentModal()">
+<i class="fa-solid fa-file-signature"></i>
+<span>Consentimientos</span>
+</button></div>
+<!-- DATOS DE FILIACIÓN -->
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+<div class="flex justify-between items-center mb-3">
+<h2 class="text-sm font-bold text-slate-700 flex items-center gap-2">
+<i class="fa-solid fa-id-card text-indigo-600"></i> Filiación y Datos Personales
                         </h2>
-                        <span class="text-[11px] bg-indigo-50 text-indigo-600 font-semibold px-2 py-0.5 rounded-md" id="patientIdDisplay">HC-2026</span>
-                    </div>
-                    
-                    <div class="space-y-3 text-xs">
-                        <div>
-                            <label class="block font-medium text-slate-500 mb-1">Nombre Completo del Paciente</label>
-                            <input type="text" id="inputPatientName" class="w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500 outline-none transition" placeholder="Nombre completo...">
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div>
-                                <label class="block font-medium text-slate-500 mb-1">DNI / Cédula / Doc.</label>
-                                <input type="text" id="inputPatientDni" class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Doc. Identidad...">
-                            </div>
-                            <div>
-                                <label class="block font-medium text-slate-500 mb-1">F. Nacimiento</label>
-                                <input type="date" id="inputPatientDOB" onchange="onDobChange(this.value)" class="w-full border border-slate-300 rounded-lg px-1.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none text-[11px]">
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div>
-                                <label class="block font-medium text-slate-500 mb-1">Edad (Auto)</label>
-                                <input type="number" id="inputPatientAge" class="w-full border border-slate-200 bg-slate-50 rounded-lg px-2.5 py-1.5 outline-none font-bold text-indigo-600" placeholder="Automático" readonly>
-                            </div>
-                            <div>
-                                <label class="block font-medium text-slate-500 mb-1">Teléfono / Celular</label>
-                                <input type="text" id="inputPatientPhone" class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="+51 / Teléfono">
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div>
-                                <label class="block font-medium text-slate-500 mb-1">Estado Civil / Nac.</label>
-                                <input type="text" id="inputPatientCivic" class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Soltero/a, Nac.">
-                            </div>
-                            <div>
-                                <label class="block font-medium text-slate-500 mb-1">Obra Social / Prepaga</label>
-                                <input type="text" id="inputPatientInsurance" class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="O.S. / Seguro">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block font-medium text-slate-500 mb-1">Domicilio (Calle, N°, Barrio, Loc.)</label>
-                            <input type="text" id="inputPatientAddress" class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Dirección completa...">
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div>
-                                <label class="block font-medium text-slate-500 mb-1">N° Afiliado / Titular</label>
-                                <input type="text" id="inputPatientAfil" class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="N° Afiliado">
-                            </div>
-                            <div>
-                                <label class="block font-medium text-slate-500 mb-1">Ocupación / Profesión</label>
-                                <input type="text" id="inputPatientJob" class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Profesión u oficio">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ANTECEDENTES MÉDICOS (DECLARACIÓN JURADA) -->
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-                    <button onclick="toggleAnamnesis()" class="w-full text-sm font-bold text-slate-700 flex justify-between items-center cursor-pointer">
-                        <span class="flex items-center gap-2"><i class="fa-solid fa-file-medical text-rose-500"></i> Antecedentes Médicos (Declaración)</span>
-                        <i id="anamnesisChevron" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
-                    </button>
-                    
-                    <div id="anamnesisContainer" class="hidden mt-3 pt-3 border-t border-slate-100 space-y-4 text-xs">
-                        <div>
-                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">1. Estilo de Vida y Familia</p>
-                            <div class="grid grid-cols-2 gap-2 text-slate-600 font-medium">
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkFatherAlive" class="rounded border-slate-300 text-indigo-600"> Padre con vida</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkMotherAlive" class="rounded border-slate-300 text-indigo-600"> Madre con vida</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkSmoking" class="rounded border-slate-300 text-indigo-600"> Fuma habitualm.</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkSports" class="rounded border-slate-300 text-indigo-600"> Realiza Deporte</label>
-                            </div>
-                            <div class="grid grid-cols-2 gap-2 mt-2">
-                                <input type="text" id="inputSportsMaldiaz" placeholder="Malestar al hacer deporte..." class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]">
-                                <input type="text" id="inputFamilyDiseases" placeholder="Enfermedades familiares..." class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]">
-                            </div>
-                        </div>
-
-                        <div>
-                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">2. Enfermedades Sistémicas y Quirúrgicas</p>
-                            <div class="grid grid-cols-2 gap-2 text-slate-600 font-medium">
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkHipertencion" class="rounded border-slate-300 text-indigo-600"> Hipertensión</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkDiabetes" class="rounded border-slate-300 text-indigo-600"> Diabetes</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkCardiopatia" class="rounded border-slate-300 text-indigo-600"> Problema Cardíaco</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkFiebreReumatica" class="rounded border-slate-300 text-indigo-600"> Fiebre Reumática</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkRespiratorio" class="rounded border-slate-300 text-indigo-600"> Probl. Respiratorio</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkRenal" class="rounded border-slate-300 text-indigo-600"> Probl. Renal</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkHepatico" class="rounded border-slate-300 text-indigo-600"> Probl. Hepático</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkUlcera" class="rounded border-slate-300 text-indigo-600"> Úlcera Gástrica</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkEpilepsia" class="rounded border-slate-300 text-indigo-600"> Epiléptico / Convuls.</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkChagas" class="rounded border-slate-300 text-indigo-600"> Chagas</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkEmbarazo" class="rounded border-slate-300 text-indigo-600"> Embarazada</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkOperado" class="rounded border-slate-300 text-indigo-600"> Fue Operado/a</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkTransfusiones" class="rounded border-slate-300 text-indigo-600"> Transfusiones</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkHiperlaxitud" class="rounded border-slate-300 text-indigo-600"> Hiperlaxitud/Colágeno</label>
-                            </div>
-                            
-                            <div class="grid grid-cols-2 gap-2 mt-2">
-                                <div>
-                                    <label class="block text-[10px] text-slate-400 font-semibold mb-0.5">Hepatitis (A, B, C / Fecha)</label>
-                                    <input type="text" id="inputHepatitis" placeholder="Tipo y año..." class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]">
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] text-slate-400 font-semibold mb-0.5">Meses de Gestación</label>
-                                    <input type="number" id="inputPregnancyMonths" placeholder="N° Meses..." class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">3. Alergias y Medicación</p>
-                            <div class="grid grid-cols-2 gap-2 text-slate-600 font-medium">
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkAlergiaAnestesia" class="rounded border-slate-300 text-indigo-600"> Alergia Anestesia</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkAlergiaPenicilina" class="rounded border-slate-300 text-indigo-600"> Alergia Penicilina</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkAspirinaAnticoag" class="rounded border-slate-300 text-indigo-600"> Anticoag. / Aspirina</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkSangradoProfuso" class="rounded border-slate-300 text-indigo-600"> Sangra mucho / Cicatrización</label>
-                            </div>
-                            <div class="space-y-2 mt-2">
-                                <input type="text" id="inputOtherAllergies" placeholder="Otras alergias a medicamentos..." class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]">
-                                <input type="text" id="inputMeds" placeholder="Medicamentos de uso habitual..." class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]">
-                                <input type="text" id="inputMeds5Years" placeholder="Medicamentos consumidos últimos 5 años..." class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]">
-                                <input type="text" id="inputAlternativeTherapy" placeholder="Tratamientos alternativos (Homeopatía, Acupuntura...)" class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ANAMNESIS ODONTOLÓGICA & DOLOR -->
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-                    <button onclick="toggleOdontoAnamnesis()" class="w-full text-sm font-bold text-slate-700 flex justify-between items-center cursor-pointer">
-                        <span class="flex items-center gap-2"><i class="fa-solid fa-tooth text-amber-500"></i> Anamnesis Odontológica y Dolor</span>
-                        <i id="odontoAnamnesisChevron" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
-                    </button>
-
-                    <div id="odontoAnamnesisContainer" class="hidden mt-3 pt-3 border-t border-slate-100 space-y-3 text-xs">
-                        <div>
-                            <label class="block font-medium text-slate-500 mb-1">Motivo Principal de Consulta</label>
-                            <textarea id="inputMotivo" rows="2" placeholder="¿Por qué asistió a la consulta?..." class="w-full border border-slate-300 rounded-lg p-2 text-xs outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-2 text-slate-600 font-medium">
-                            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkConsultedBefore" class="rounded border-slate-300 text-indigo-600"> Consultó dentista antes</label>
-                            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkTookMedsForPain" class="rounded border-slate-300 text-indigo-600"> Tomó medicación dolor</label>
-                        </div>
-
-                        <div class="border-t border-slate-100 pt-2">
-                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1.5">Semiología del Dolor</p>
-                            <div class="space-y-2">
-                                <div class="grid grid-cols-3 gap-1 text-[11px]">
-                                    <select id="selectPainIntensity" class="border border-slate-300 rounded-lg p-1 bg-white">
-                                        <option value="">-- Intensidad --</option>
-                                        <option value="Suave">Suave</option>
-                                        <option value="Moderado">Moderado</option>
-                                        <option value="Intenso">Intenso</option>
-                                    </select>
-                                    <select id="selectPainTiming" class="border border-slate-300 rounded-lg p-1 bg-white">
-                                        <option value="">-- Frecuencia --</option>
-                                        <option value="Temporario">Temporario</option>
-                                        <option value="Intermitente">Intermitente</option>
-                                        <option value="Continuo">Continuo</option>
-                                    </select>
-                                    <select id="selectPainOrigin" class="border border-slate-300 rounded-lg p-1 bg-white">
-                                        <option value="">-- Estímulo --</option>
-                                        <option value="Espontáneo">Espontáneo</option>
-                                        <option value="Provocado">Provocado</option>
-                                        <option value="Al frío">Al frío</option>
-                                        <option value="Al calor">Al calor</option>
-                                    </select>
-                                </div>
-                                <div class="grid grid-cols-2 gap-2">
-                                    <input type="text" id="inputPainLocation" placeholder="Localizado / Irradiado hacia..." class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]">
-                                    <input type="text" id="inputPainRelief" placeholder="¿Se calma con algo?..." class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="border-t border-slate-100 pt-2">
-                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1.5">Traumatismos & Dificultades</p>
-                            <div class="grid grid-cols-2 gap-2 text-slate-600 font-medium">
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkToothBlow" class="rounded border-slate-300 text-indigo-600"> Golpe / Traumatismo</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkToothFracture" class="rounded border-slate-300 text-indigo-600"> Diente Fracturado</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkDiffSpeak" class="rounded border-slate-300 text-indigo-600"> Dificultad para Hablar</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkDiffChew" class="rounded border-slate-300 text-indigo-600"> Dificultad para Masticar</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkDiffOpen" class="rounded border-slate-300 text-indigo-600"> Dificultad para Abrir Boca</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkDiffSwallow" class="rounded border-slate-300 text-indigo-600"> Dificultad para Tragar</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- EXAMEN TEJIDOS BLANDOS & HIGIENE -->
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-                    <button onclick="toggleSoftTissueExam()" class="w-full text-sm font-bold text-slate-700 flex justify-between items-center cursor-pointer">
-                        <span class="flex items-center gap-2"><i class="fa-solid fa-lips text-emerald-600"></i> Examen Tejidos Blandos & Estado Bucal</span>
-                        <i id="softTissueChevron" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
-                    </button>
-
-                    <div id="softTissueContainer" class="hidden mt-3 pt-3 border-t border-slate-100 space-y-3 text-xs">
-                        <div>
-                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">Tejidos Observados (Anormalidades)</p>
-                            <input type="text" id="inputSoftTissuesObs" placeholder="Labios, lengua, paladar, piso de boca, carrillos..." class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]">
-                        </div>
-
-                        <div>
-                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1.5">Lesiones Presentes</p>
-                            <div class="grid grid-cols-2 gap-2 text-slate-600 font-medium">
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkLesionManchas" class="rounded border-slate-300 text-indigo-600"> Manchas</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkLesionAbultamiento" class="rounded border-slate-300 text-indigo-600"> Abultamiento</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkLesionUlceras" class="rounded border-slate-300 text-indigo-600"> Ulceraciones</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkLesionAmpollas" class="rounded border-slate-300 text-indigo-600"> Ampollas</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkBleedingGums" class="rounded border-slate-300 text-indigo-600"> Sangrado de encías</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkPusDischarge" class="rounded border-slate-300 text-indigo-600"> Salida de Pus</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkToothMobility" class="rounded border-slate-300 text-indigo-600"> Movilidad dental</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkHighBite" class="rounded border-slate-300 text-indigo-600"> Dientes altos al morder</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkSarro" class="rounded border-slate-300 text-indigo-600"> Presencia de Sarro</label>
-                                <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="checkPeriodontal" class="rounded border-slate-300 text-indigo-600"> Enf. Periodontal</label>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-2 border-t border-slate-100 pt-2">
-                            <div>
-                                <label class="block text-[10px] text-slate-400 font-semibold mb-0.5">Momentos Azúcar Diario</label>
-                                <input type="number" id="inputSugarMoments" placeholder="N° Veces..." class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] text-slate-400 font-semibold mb-0.5">Índice de Placa (%)</label>
-                                <input type="text" id="inputPlaqueIndex" placeholder="Ej: 25%..." class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">Estado Higiene Bucal</label>
-                            <select id="selectHygieneStatus" class="w-full border border-slate-300 rounded-lg p-1.5 text-xs bg-white font-semibold">
-                                <option value="Muy bueno">Muy bueno</option>
-                                <option value="Bueno" selected>Bueno</option>
-                                <option value="Deficiente">Deficiente</option>
-                                <option value="Malo">Malo</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block font-medium text-slate-500 mb-1">Diagnóstico Presuntivo & Plan</label>
-                            <textarea id="inputPresumptiveDiagnosis" rows="2" placeholder="Diagnóstico presuntivo general..." class="w-full border border-slate-300 rounded-lg p-2 text-xs outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ASISTENTE DE VOZ & ESTADO ACTIVO -->
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col gap-4">
-                    <div>
-                        <h2 class="text-sm font-bold text-slate-700 mb-1 flex items-center gap-2">
-                            <i class="fa-solid fa-microphone-lines text-indigo-600"></i> Asistente Clínico por Voz
+<span class="text-[11px] bg-indigo-50 text-indigo-600 font-semibold px-2 py-0.5 rounded-md" id="patientIdDisplay">HC-2026</span>
+</div>
+<div class="space-y-3 text-xs">
+<div>
+<label class="block font-medium text-slate-500 mb-1">Nombre Completo del Paciente</label>
+<input class="w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500 outline-none transition" id="inputPatientName" placeholder="Nombre completo..." type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div>
+<label class="block font-medium text-slate-500 mb-1">DNI / Cédula / Doc.</label>
+<input class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none" id="inputPatientDni" placeholder="Doc. Identidad..." type="text"/>
+</div>
+<div>
+<label class="block font-medium text-slate-500 mb-1">F. Nacimiento</label>
+<input class="w-full border border-slate-300 rounded-lg px-1.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none text-[11px]" id="inputPatientDOB" onchange="onDobChange(this.value)" type="date"/>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div>
+<label class="block font-medium text-slate-500 mb-1">Edad (Auto)</label>
+<input class="w-full border border-slate-200 bg-slate-50 rounded-lg px-2.5 py-1.5 outline-none font-bold text-indigo-600" id="inputPatientAge" placeholder="Automático" readonly="" type="number"/>
+</div>
+<div>
+<label class="block font-medium text-slate-500 mb-1">Teléfono / Celular</label>
+<input class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none" id="inputPatientPhone" placeholder="+51 / Teléfono" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div>
+<label class="block font-medium text-slate-500 mb-1">Estado Civil / Nac.</label>
+<input class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none" id="inputPatientCivic" placeholder="Soltero/a, Nac." type="text"/>
+</div>
+<div>
+<label class="block font-medium text-slate-500 mb-1">Obra Social / Prepaga</label>
+<input class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none" id="inputPatientInsurance" placeholder="O.S. / Seguro" type="text"/>
+</div>
+</div>
+<div>
+<label class="block font-medium text-slate-500 mb-1">Domicilio (Calle, N°, Barrio, Loc.)</label>
+<input class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none" id="inputPatientAddress" placeholder="Dirección completa..." type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div>
+<label class="block font-medium text-slate-500 mb-1">N° Afiliado / Titular</label>
+<input class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none" id="inputPatientAfil" placeholder="N° Afiliado" type="text"/>
+</div>
+<div>
+<label class="block font-medium text-slate-500 mb-1">Ocupación / Profesión</label>
+<input class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none" id="inputPatientJob" placeholder="Profesión u oficio" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<!-- ANTECEDENTES MÉDICOS (DECLARACIÓN JURADA) -->
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+<button class="w-full text-sm font-bold text-slate-700 flex justify-between items-center cursor-pointer" onclick="toggleAnamnesis()">
+<span class="flex items-center gap-2"><i class="fa-solid fa-file-medical text-rose-500"></i> Antecedentes Médicos (Declaración)</span>
+<i class="fa-solid fa-chevron-down text-slate-400 transition-transform" id="anamnesisChevron"></i>
+</button>
+<div class="hidden mt-3 pt-3 border-t border-slate-100 space-y-4 text-xs" id="anamnesisContainer">
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">1. Estilo de Vida y Familia</p>
+<div class="grid grid-cols-2 gap-2 text-slate-600 font-medium">
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkFatherAlive" type="checkbox"/> Padre con vida</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkMotherAlive" type="checkbox"/> Madre con vida</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkSmoking" type="checkbox"/> Fuma habitualm.</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkSports" type="checkbox"/> Realiza Deporte</label>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-2">
+<input class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]" id="inputSportsMaldiaz" placeholder="Malestar al hacer deporte..." type="text"/>
+<input class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]" id="inputFamilyDiseases" placeholder="Enfermedades familiares..." type="text"/>
+</div>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">2. Enfermedades Sistémicas y Quirúrgicas</p>
+<div class="grid grid-cols-2 gap-2 text-slate-600 font-medium">
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkHipertencion" type="checkbox"/> Hipertensión</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkDiabetes" type="checkbox"/> Diabetes</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkCardiopatia" type="checkbox"/> Problema Cardíaco</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkFiebreReumatica" type="checkbox"/> Fiebre Reumática</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkRespiratorio" type="checkbox"/> Probl. Respiratorio</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkRenal" type="checkbox"/> Probl. Renal</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkHepatico" type="checkbox"/> Probl. Hepático</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkUlcera" type="checkbox"/> Úlcera Gástrica</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkEpilepsia" type="checkbox"/> Epiléptico / Convuls.</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkChagas" type="checkbox"/> Chagas</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkEmbarazo" type="checkbox"/> Embarazada</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkOperado" type="checkbox"/> Fue Operado/a</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkTransfusiones" type="checkbox"/> Transfusiones</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkHiperlaxitud" type="checkbox"/> Hiperlaxitud/Colágeno</label>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-2">
+<div>
+<label class="block text-[10px] text-slate-400 font-semibold mb-0.5">Hepatitis (A, B, C / Fecha)</label>
+<input class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]" id="inputHepatitis" placeholder="Tipo y año..." type="text"/>
+</div>
+<div>
+<label class="block text-[10px] text-slate-400 font-semibold mb-0.5">Meses de Gestación</label>
+<input class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]" id="inputPregnancyMonths" placeholder="N° Meses..." type="number"/>
+</div>
+</div>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">3. Alergias y Medicación</p>
+<div class="grid grid-cols-2 gap-2 text-slate-600 font-medium">
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkAlergiaAnestesia" type="checkbox"/> Alergia Anestesia</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkAlergiaPenicilina" type="checkbox"/> Alergia Penicilina</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkAspirinaAnticoag" type="checkbox"/> Anticoag. / Aspirina</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkSangradoProfuso" type="checkbox"/> Sangra mucho / Cicatrización</label>
+</div>
+<div class="space-y-2 mt-2">
+<input class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]" id="inputOtherAllergies" placeholder="Otras alergias a medicamentos..." type="text"/>
+<input class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]" id="inputMeds" placeholder="Medicamentos de uso habitual..." type="text"/>
+<input class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]" id="inputMeds5Years" placeholder="Medicamentos consumidos últimos 5 años..." type="text"/>
+<input class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]" id="inputAlternativeTherapy" placeholder="Tratamientos alternativos (Homeopatía, Acupuntura...)" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<!-- ANAMNESIS ODONTOLÓGICA & DOLOR -->
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+<button class="w-full text-sm font-bold text-slate-700 flex justify-between items-center cursor-pointer" onclick="toggleOdontoAnamnesis()">
+<span class="flex items-center gap-2"><i class="fa-solid fa-tooth text-amber-500"></i> Anamnesis Odontológica y Dolor</span>
+<i class="fa-solid fa-chevron-down text-slate-400 transition-transform" id="odontoAnamnesisChevron"></i>
+</button>
+<div class="hidden mt-3 pt-3 border-t border-slate-100 space-y-3 text-xs" id="odontoAnamnesisContainer">
+<div>
+<label class="block font-medium text-slate-500 mb-1">Motivo Principal de Consulta</label>
+<textarea class="w-full border border-slate-300 rounded-lg p-2 text-xs outline-none focus:ring-2 focus:ring-indigo-500" id="inputMotivo" placeholder="¿Por qué asistió a la consulta?..." rows="2"></textarea>
+</div>
+<div class="grid grid-cols-2 gap-2 text-slate-600 font-medium">
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkConsultedBefore" type="checkbox"/> Consultó dentista antes</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkTookMedsForPain" type="checkbox"/> Tomó medicación dolor</label>
+</div>
+<div class="border-t border-slate-100 pt-2">
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1.5">Semiología del Dolor</p>
+<div class="space-y-2">
+<div class="grid grid-cols-3 gap-1 text-[11px]">
+<select class="border border-slate-300 rounded-lg p-1 bg-white" id="selectPainIntensity">
+<option value="">-- Intensidad --</option>
+<option value="Suave">Suave</option>
+<option value="Moderado">Moderado</option>
+<option value="Intenso">Intenso</option>
+</select>
+<select class="border border-slate-300 rounded-lg p-1 bg-white" id="selectPainTiming">
+<option value="">-- Frecuencia --</option>
+<option value="Temporario">Temporario</option>
+<option value="Intermitente">Intermitente</option>
+<option value="Continuo">Continuo</option>
+</select>
+<select class="border border-slate-300 rounded-lg p-1 bg-white" id="selectPainOrigin">
+<option value="">-- Estímulo --</option>
+<option value="Espontáneo">Espontáneo</option>
+<option value="Provocado">Provocado</option>
+<option value="Al frío">Al frío</option>
+<option value="Al calor">Al calor</option>
+</select>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<input class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]" id="inputPainLocation" placeholder="Localizado / Irradiado hacia..." type="text"/>
+<input class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]" id="inputPainRelief" placeholder="¿Se calma con algo?..." type="text"/>
+</div>
+</div>
+</div>
+<div class="border-t border-slate-100 pt-2">
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1.5">Traumatismos &amp; Dificultades</p>
+<div class="grid grid-cols-2 gap-2 text-slate-600 font-medium">
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkToothBlow" type="checkbox"/> Golpe / Traumatismo</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkToothFracture" type="checkbox"/> Diente Fracturado</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkDiffSpeak" type="checkbox"/> Dificultad para Hablar</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkDiffChew" type="checkbox"/> Dificultad para Masticar</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkDiffOpen" type="checkbox"/> Dificultad para Abrir Boca</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkDiffSwallow" type="checkbox"/> Dificultad para Tragar</label>
+</div>
+</div>
+</div>
+</div>
+<!-- EXAMEN TEJIDOS BLANDOS & HIGIENE -->
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+<button class="w-full text-sm font-bold text-slate-700 flex justify-between items-center cursor-pointer" onclick="toggleSoftTissueExam()">
+<span class="flex items-center gap-2"><i class="fa-solid fa-lips text-emerald-600"></i> Examen Tejidos Blandos &amp; Estado Bucal</span>
+<i class="fa-solid fa-chevron-down text-slate-400 transition-transform" id="softTissueChevron"></i>
+</button>
+<div class="hidden mt-3 pt-3 border-t border-slate-100 space-y-3 text-xs" id="softTissueContainer">
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">Tejidos Observados (Anormalidades)</p>
+<input class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]" id="inputSoftTissuesObs" placeholder="Labios, lengua, paladar, piso de boca, carrillos..." type="text"/>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1.5">Lesiones Presentes</p>
+<div class="grid grid-cols-2 gap-2 text-slate-600 font-medium">
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkLesionManchas" type="checkbox"/> Manchas</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkLesionAbultamiento" type="checkbox"/> Abultamiento</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkLesionUlceras" type="checkbox"/> Ulceraciones</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkLesionAmpollas" type="checkbox"/> Ampollas</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkBleedingGums" type="checkbox"/> Sangrado de encías</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkPusDischarge" type="checkbox"/> Salida de Pus</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkToothMobility" type="checkbox"/> Movilidad dental</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkHighBite" type="checkbox"/> Dientes altos al morder</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkSarro" type="checkbox"/> Presencia de Sarro</label>
+<label class="flex items-center gap-1.5 cursor-pointer"><input class="rounded border-slate-300 text-indigo-600" id="checkPeriodontal" type="checkbox"/> Enf. Periodontal</label>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 border-t border-slate-100 pt-2">
+<div>
+<label class="block text-[10px] text-slate-400 font-semibold mb-0.5">Momentos Azúcar Diario</label>
+<input class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]" id="inputSugarMoments" placeholder="N° Veces..." type="number"/>
+</div>
+<div>
+<label class="block text-[10px] text-slate-400 font-semibold mb-0.5">Índice de Placa (%)</label>
+<input class="w-full border border-slate-200 rounded-lg p-1.5 text-[11px]" id="inputPlaqueIndex" placeholder="Ej: 25%..." type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">Estado Higiene Bucal</label>
+<select class="w-full border border-slate-300 rounded-lg p-1.5 text-xs bg-white font-semibold" id="selectHygieneStatus">
+<option value="Muy bueno">Muy bueno</option>
+<option selected="" value="Bueno">Bueno</option>
+<option value="Deficiente">Deficiente</option>
+<option value="Malo">Malo</option>
+</select>
+</div>
+<div>
+<label class="block font-medium text-slate-500 mb-1">Diagnóstico Presuntivo &amp; Plan</label>
+<textarea class="w-full border border-slate-300 rounded-lg p-2 text-xs outline-none focus:ring-2 focus:ring-indigo-500" id="inputPresumptiveDiagnosis" placeholder="Diagnóstico presuntivo general..." rows="2"></textarea>
+</div>
+</div>
+</div>
+<!-- ASISTENTE DE VOZ & ESTADO ACTIVO -->
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col gap-4">
+<div>
+<h2 class="text-sm font-bold text-slate-700 mb-1 flex items-center gap-2">
+<i class="fa-solid fa-microphone-lines text-indigo-600"></i> Asistente Clínico por Voz
                         </h2>
-                        <p class="text-[11px] text-slate-400">Dicta la pieza y el estado manos libres (ej: "pieza cuatro punto cuatro caries").</p>
-                    </div>
-
-                    <div class="flex items-center justify-between bg-slate-50 p-3 rounded-xl border border-slate-200">
-                        <div class="flex items-center gap-2.5">
-                            <span id="micStatusDot" class="w-3 h-3 rounded-full bg-slate-300"></span>
-                            <span id="micStatusText" class="text-xs font-semibold text-slate-600">Micrófono inactivo</span>
-                        </div>
-                        <button id="voiceBtn" onclick="toggleVoiceRecognition()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs px-4 py-2 rounded-xl font-medium transition flex items-center gap-2 shadow-xs cursor-pointer">
-                            <i id="micIcon" class="fa-solid fa-microphone"></i>
-                            <span id="micBtnLabel">Iniciar Dictado</span>
-                        </button>
-                    </div>
-
-                    <div id="voiceTranscriptBox" class="bg-indigo-50/60 border border-indigo-200 rounded-xl p-3 text-xs flex flex-col gap-1">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 flex items-center gap-1">
-                            <i class="fa-solid fa-comment-dots"></i> Último dictado capturado:
+<p class="text-[11px] text-slate-400">Dicta la pieza y el estado manos libres (ej: "pieza cuatro punto cuatro caries").</p>
+</div>
+<div class="flex items-center justify-between bg-slate-50 p-3 rounded-xl border border-slate-200">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-slate-300" id="micStatusDot"></span>
+<span class="text-xs font-semibold text-slate-600" id="micStatusText">Micrófono inactivo</span>
+</div>
+<button class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs px-4 py-2 rounded-xl font-medium transition flex items-center gap-2 shadow-xs cursor-pointer" id="voiceBtn" onclick="toggleVoiceRecognition()">
+<i class="fa-solid fa-microphone" id="micIcon"></i>
+<span id="micBtnLabel">Iniciar Dictado</span>
+</button>
+</div>
+<div class="bg-indigo-50/60 border border-indigo-200 rounded-xl p-3 text-xs flex flex-col gap-1" id="voiceTranscriptBox">
+<span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 flex items-center gap-1">
+<i class="fa-solid fa-comment-dots"></i> Último dictado capturado:
                         </span>
-                        <p id="voiceTranscriptText" class="text-slate-700 font-medium italic">Presione 'Iniciar Dictado' y hable a su micrófono...</p>
-                    </div>
-
-                    <div class="pt-2 border-t border-slate-100">
-                        <label class="block text-xs font-bold text-slate-700 mb-2 flex items-center justify-between">
-                            <span><i class="fa-solid fa-palette text-indigo-600 mr-1"></i> Estado Clínico Manual Activo</span>
-                            <span class="text-[10px] text-slate-400 font-normal">(Para clic manual)</span>
-                        </label>
-                        
-                        <div class="relative">
-                            <select id="stateSelectDropdown" onchange="onStateSelectChange(this.value)" class="w-full border border-indigo-200 bg-indigo-50/40 text-slate-800 text-xs rounded-xl p-2.5 font-semibold focus:ring-2 focus:ring-indigo-500 outline-none cursor-pointer">
-                            </select>
-                        </div>
-
-                        <div id="activeStateBadge" class="mt-2.5 p-2 rounded-xl border text-xs font-medium flex items-center gap-2">
-                            <span id="activeStateDot" class="w-2.5 h-2.5 rounded-full"></span>
-                            <span id="activeStateName" class="font-bold">Caries</span>
-                            <span id="activeStateColorTag" class="ml-auto text-[10px] font-semibold px-2 py-0.5 rounded-full uppercase bg-white/60">Rojo</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- PANEL DERECHO: ODONTOGRAMA, HALLAZGOS Y PRESUPUESTO -->
-            <div class="lg:col-span-8 flex flex-col gap-6">
-
-                <!-- ENCABEZADO DE IMPRESIÓN EXCLUSIVA HC -->
-                <div id="clinicalPrintReportArea" class="print-only hidden bg-white p-6 rounded-2xl border border-slate-200 space-y-4">
-                    <div class="flex justify-between items-start border-b border-slate-300 pb-4">
-                        <div class="flex items-center gap-3">
-                            <div id="printLogoContainer" class="hidden w-12 h-12 items-center justify-center overflow-hidden">
-                                <img id="customPrintLogo" class="hidden max-h-12 max-w-12 object-contain" alt="Logo de la clínica">
-                            </div>
-                            <div>
-                                <h1 id="printClinicName" class="text-xl font-bold text-slate-900">OdontoFlow Studio</h1>
-                                <p class="text-xs text-slate-500">Historia Clínica Odontológica & Odontograma Integral</p>
-                            </div>
-                        </div>
-                        <div class="text-right text-xs text-slate-500">
-                            <p class="font-bold text-slate-700">Fecha de Impresión: <span id="printDate">--/--/----</span></p>
-                            <p>N° Historia Clínica: <span id="printPatientId">HC-2026</span></p>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
-                        <div><span class="font-bold text-slate-600">Paciente:</span> <div id="printNameVal" class="font-semibold text-slate-800">---</div></div>
-                        <div><span class="font-bold text-slate-600">DNI / Doc:</span> <div id="printDniVal" class="font-semibold text-slate-800">---</div></div>
-                        <div><span class="font-bold text-slate-600">Edad:</span> <div id="printAgeVal" class="font-semibold text-slate-800">---</div></div>
-                        <div><span class="font-bold text-slate-600">Teléfono:</span> <div id="printPhoneVal" class="font-semibold text-slate-800">---</div></div>
-                    </div>
-
-                    <div id="printClinicalReportBody"></div>
-                </div>
-
-                <!-- ODONTOGRAMA GRÁFICO -->
-                <div class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center">
-                    
-                    <div class="no-print flex bg-slate-100 p-1 rounded-xl mb-5 text-xs font-semibold">
-                        <button onclick="setDentitionType('adult')" id="btnAdult" class="px-4 py-1.5 rounded-lg bg-white text-slate-800 shadow-xs transition cursor-pointer">Permanente (Adultos)</button>
-                        <button onclick="setDentitionType('child')" id="btnChild" class="px-4 py-1.5 rounded-lg text-slate-500 hover:text-slate-800 transition cursor-pointer">Temporal (Niños)</button>
-                    </div>
-
-                    <div class="w-full flex justify-between items-center mb-2 px-2">
-                        <span class="text-[11px] font-bold text-indigo-600 uppercase tracking-wider">Arco Dental <span id="dentitionLabel">Permanente</span></span>
-                        <span class="text-[10px] text-slate-400 font-medium">Haga clic sobre una pieza para aplicar el estado activo</span>
-                    </div>
-
-                    <div class="w-full mb-6">
-                        <div class="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Maxilar Superior</div>
-                        <div id="upperArch" class="flex justify-center items-center gap-1 sm:gap-1.5 flex-wrap">
-                        </div>
-                    </div>
-
-                    <div class="w-full border-t border-dashed border-slate-300 my-1 relative">
-                        <span class="absolute left-1/2 -translate-x-1/2 -top-2 bg-white px-2 text-[9px] text-slate-400 font-bold tracking-widest uppercase">Línea Media</span>
-                    </div>
-
-                    <div class="w-full mt-4">
-                        <div id="lowerArch" class="flex justify-center items-center gap-1 sm:gap-1.5 flex-wrap mb-2">
-                        </div>
-                        <div class="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">Maxilar Inferior</div>
-                    </div>
-                </div>
-
-                <!-- DETALLE PIEZA SELECCIONADA -->
-                <div class="no-print bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-3">
-                    <div class="flex items-center gap-3">
-                        <div id="selectedToothBadge" class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-700 font-bold text-sm flex items-center justify-center">
+<p class="text-slate-700 font-medium italic" id="voiceTranscriptText">Presione 'Iniciar Dictado' y hable a su micrófono...</p>
+</div>
+<div class="pt-2 border-t border-slate-100">
+<label class="block text-xs font-bold text-slate-700 mb-2 flex items-center justify-between">
+<span><i class="fa-solid fa-palette text-indigo-600 mr-1"></i> Estado Clínico Manual Activo</span>
+<span class="text-[10px] text-slate-400 font-normal">(Para clic manual)</span>
+</label>
+<div class="relative">
+<select class="w-full border border-indigo-200 bg-indigo-50/40 text-slate-800 text-xs rounded-xl p-2.5 font-semibold focus:ring-2 focus:ring-indigo-500 outline-none cursor-pointer" id="stateSelectDropdown" onchange="onStateSelectChange(this.value)">
+</select>
+</div>
+<div class="mt-2.5 p-2 rounded-xl border text-xs font-medium flex items-center gap-2" id="activeStateBadge">
+<span class="w-2.5 h-2.5 rounded-full" id="activeStateDot"></span>
+<span class="font-bold" id="activeStateName">Caries</span>
+<span class="ml-auto text-[10px] font-semibold px-2 py-0.5 rounded-full uppercase bg-white/60" id="activeStateColorTag">Rojo</span>
+</div>
+</div>
+</div>
+</div>
+<!-- PANEL DERECHO: ODONTOGRAMA, HALLAZGOS Y PRESUPUESTO -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- ENCABEZADO DE IMPRESIÓN EXCLUSIVA HC -->
+<div class="print-only hidden bg-white p-6 rounded-2xl border border-slate-200 space-y-4" id="clinicalPrintReportArea">
+<div class="flex justify-between items-start border-b border-slate-300 pb-4">
+<div class="flex items-center gap-3">
+<div class="hidden w-12 h-12 items-center justify-center overflow-hidden" id="printLogoContainer">
+<img alt="Logo de la clínica" class="hidden max-h-12 max-w-12 object-contain" id="customPrintLogo"/>
+</div>
+<div>
+<h1 class="text-xl font-bold text-slate-900" id="printClinicName">OdontoFlow Studio</h1>
+<p class="text-xs text-slate-500">Historia Clínica Odontológica &amp; Odontograma Integral</p>
+</div>
+</div>
+<div class="text-right text-xs text-slate-500">
+<p class="font-bold text-slate-700">Fecha de Impresión: <span id="printDate">--/--/----</span></p>
+<p>N° Historia Clínica: <span id="printPatientId">HC-2026</span></p>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
+<div><span class="font-bold text-slate-600">Paciente:</span> <div class="font-semibold text-slate-800" id="printNameVal">---</div></div>
+<div><span class="font-bold text-slate-600">DNI / Doc:</span> <div class="font-semibold text-slate-800" id="printDniVal">---</div></div>
+<div><span class="font-bold text-slate-600">Edad:</span> <div class="font-semibold text-slate-800" id="printAgeVal">---</div></div>
+<div><span class="font-bold text-slate-600">Teléfono:</span> <div class="font-semibold text-slate-800" id="printPhoneVal">---</div></div>
+</div>
+<div id="printClinicalReportBody"></div>
+</div>
+<!-- ODONTOGRAMA GRÁFICO -->
+<div class="no-print flex justify-end"><button type="button" onclick="openSettingsModal(); document.getElementById('settingsStatesContainer').scrollIntoView({block:'center'});" class="text-xs bg-indigo-50 text-indigo-700 px-3 py-2 rounded-lg"><i class="fa-solid fa-pen"></i> Editar iconos del odontograma</button></div>
+<div class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center">
+<div class="no-print flex bg-slate-100 p-1 rounded-xl mb-5 text-xs font-semibold">
+<button class="px-4 py-1.5 rounded-lg bg-white text-slate-800 shadow-xs transition cursor-pointer" id="btnAdult" onclick="setDentitionType('adult')">Permanente (Adultos)</button>
+<button class="px-4 py-1.5 rounded-lg text-slate-500 hover:text-slate-800 transition cursor-pointer" id="btnChild" onclick="setDentitionType('child')">Temporal (Niños)</button>
+</div>
+<div class="w-full flex justify-between items-center mb-2 px-2">
+<span class="text-[11px] font-bold text-indigo-600 uppercase tracking-wider">Arco Dental <span id="dentitionLabel">Permanente</span></span>
+<span class="text-[10px] text-slate-400 font-medium">Haga clic sobre una pieza para aplicar el estado activo</span>
+</div>
+<div class="w-full mb-6">
+<div class="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Maxilar Superior</div>
+<div class="flex justify-center items-center gap-1 sm:gap-1.5 flex-wrap" id="upperArch">
+</div>
+</div>
+<div class="w-full border-t border-dashed border-slate-300 my-1 relative">
+<span class="absolute left-1/2 -translate-x-1/2 -top-2 bg-white px-2 text-[9px] text-slate-400 font-bold tracking-widest uppercase">Línea Media</span>
+</div>
+<div class="w-full mt-4">
+<div class="flex justify-center items-center gap-1 sm:gap-1.5 flex-wrap mb-2" id="lowerArch">
+</div>
+<div class="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">Maxilar Inferior</div>
+</div>
+</div>
+<!-- DETALLE PIEZA SELECCIONADA -->
+<div class="no-print bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-700 font-bold text-sm flex items-center justify-center" id="selectedToothBadge">
                             #--
                         </div>
-                        <div>
-                            <h3 id="selectedToothTitle" class="text-xs font-bold text-slate-800">Ninguna pieza seleccionada</h3>
-                            <p id="selectedToothSubtitle" class="text-[11px] text-slate-400">Seleccione un diente para agregar notas u observaciones clínicas.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center gap-2 w-full sm:w-auto">
-                        <input type="text" id="inputToothNote" placeholder="Añadir nota clínica a la pieza..." class="text-xs border border-slate-300 rounded-lg px-3 py-1.5 flex-1 sm:w-64 focus:ring-2 focus:ring-indigo-500 outline-none">
-                        <button onclick="saveToothNote()" class="bg-slate-800 hover:bg-slate-900 text-white text-xs px-3.5 py-1.5 rounded-lg font-semibold transition cursor-pointer">Guardar Nota</button>
-                    </div>
-                </div>
-
-                <!-- HALLAZGOS DEL ODONTOGRAMA -->
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-                    <div class="flex justify-between items-center mb-3">
-                        <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-clipboard-list text-indigo-600"></i> Registros y Hallazgos del Odontograma
+<div>
+<h3 class="text-xs font-bold text-slate-800" id="selectedToothTitle">Ninguna pieza seleccionada</h3>
+<p class="text-[11px] text-slate-400" id="selectedToothSubtitle">Seleccione un diente para agregar notas u observaciones clínicas.</p>
+</div>
+</div>
+<div class="flex items-center gap-2 w-full sm:w-auto">
+<input class="text-xs border border-slate-300 rounded-lg px-3 py-1.5 flex-1 sm:w-64 focus:ring-2 focus:ring-indigo-500 outline-none" id="inputToothNote" placeholder="Añadir nota clínica a la pieza..." type="text"/>
+<button class="bg-slate-800 hover:bg-slate-900 text-white text-xs px-3.5 py-1.5 rounded-lg font-semibold transition cursor-pointer" onclick="saveToothNote()">Guardar Nota</button>
+</div>
+</div>
+<!-- HALLAZGOS DEL ODONTOGRAMA -->
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+<div class="flex justify-between items-center mb-3">
+<h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+<i class="fa-solid fa-clipboard-list text-indigo-600"></i> Registros y Hallazgos del Odontograma
                         </h2>
-                        <span id="findingsCount" class="text-[11px] bg-slate-100 text-slate-600 font-semibold px-2 py-0.5 rounded-full">0 Hallazgos</span>
-                    </div>
-
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs border-collapse">
-                            <thead>
-                                <tr class="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200 text-[11px]">
-                                    <th class="py-2 px-3">Pieza</th>
-                                    <th class="py-2 px-3">Estado Clínico / Hallazgo</th>
-                                    <th class="py-2 px-3">Observaciones / Nota</th>
-                                    <th class="py-2 px-3 text-center no-print">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="findingsTableBody" class="divide-y divide-slate-100">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- HOJA DE PRESUPUESTO -->
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-                    <div class="flex flex-wrap justify-between items-center gap-2 mb-3">
-                        <div>
-                            <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
-                                <i class="fa-solid fa-file-invoice-dollar text-emerald-600"></i> Hoja de Presupuesto
+<span class="text-[11px] bg-slate-100 text-slate-600 font-semibold px-2 py-0.5 rounded-full" id="findingsCount">0 Hallazgos</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs border-collapse">
+<thead>
+<tr class="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200 text-[11px]">
+<th class="py-2 px-3">Pieza</th>
+<th class="py-2 px-3">Estado Clínico / Hallazgo</th>
+<th class="py-2 px-3">Observaciones / Nota</th>
+<th class="py-2 px-3 text-center no-print">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100" id="findingsTableBody">
+</tbody>
+</table>
+</div>
+</div>
+<section id="visitHistorySection" class="bg-white p-5 rounded-2xl border border-slate-200 no-print"><div class="flex justify-between flex-wrap gap-2 mb-3"><h2 class="font-bold text-sm">Historial de tratamientos realizados</h2><button type="button" onclick="ofOpenVisit()" class="bg-indigo-600 text-white px-3 py-2 rounded-lg text-xs">+ Nuevo tratamiento</button></div><div class="flex flex-wrap gap-2 mb-3"><input id="ofVisitSearch" oninput="ofRenderVisits()" placeholder="Buscar tratamiento o notas" class="border p-2 rounded text-xs"><input id="ofVisitFilterDate" type="date" onchange="ofRenderVisits()" class="border p-2 rounded text-xs"><button type="button" onclick="ofPrintVisits()" class="bg-slate-100 rounded px-3 text-xs">Imprimir historial</button></div><div id="ofVisitList" class="space-y-3 text-xs"></div></section>
+<!-- HOJA DE PRESUPUESTO -->
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+<div class="flex flex-wrap justify-between items-center gap-2 mb-3">
+<div>
+<h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+<i class="fa-solid fa-file-invoice-dollar text-emerald-600"></i> Hoja de Presupuesto
                             </h2>
-                            <p class="text-[11px] text-slate-400 no-print">Agregue y cotice los tratamientos a realizar para el paciente.</p>
-                        </div>
-                        <button onclick="addBudgetItem()" class="no-print bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3 py-1.5 rounded-xl font-semibold transition flex items-center gap-1 shadow-xs cursor-pointer">
-                            <i class="fa-solid fa-plus"></i> + Agregar Tratamiento
+<p class="text-[11px] text-slate-400 no-print">Agregue y cotice los tratamientos a realizar para el paciente.</p>
+</div>
+<button class="no-print bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3 py-1.5 rounded-xl font-semibold transition flex items-center gap-1 shadow-xs cursor-pointer" onclick="addBudgetItem()">
+<i class="fa-solid fa-plus"></i> + Agregar Tratamiento
                         </button>
-                    </div>
-
-                    <div class="overflow-x-auto mb-4">
-                        <table class="w-full text-left text-xs border-collapse">
-                            <thead>
-                                <tr class="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200 text-[11px]">
-                                    <th class="py-2 px-3">Tratamiento / Concepto</th>
-                                    <th class="py-2 px-3 text-center w-20">Cant.</th>
-                                    <th class="py-2 px-3 text-right w-28">Precio (<span class="currencySymbolDisplay">$</span>)</th>
-                                    <th class="py-2 px-3 text-right w-28">Total (<span class="currencySymbolDisplay">$</span>)</th>
-                                    <th class="py-2 px-3 text-center w-12 no-print"></th>
-                                </tr>
-                            </thead>
-                            <tbody id="budgetTableBody" class="divide-y divide-slate-100">
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="border-t border-slate-200 pt-3 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs">
-                        
-                        <div class="no-print flex items-center gap-2 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                            <span class="font-bold text-slate-600">Descuento:</span>
-                            <input type="number" id="inputDiscountVal" value="0" min="0" step="any" oninput="updateDiscountConfig()" class="w-20 border border-slate-300 rounded-lg px-2 py-1 text-xs font-semibold focus:ring-2 focus:ring-emerald-500 outline-none">
-                            <select id="selectDiscountType" onchange="updateDiscountConfig()" class="border border-slate-300 rounded-lg px-2 py-1 text-xs font-semibold bg-white cursor-pointer">
-                                <option value="fixed">Monto Fijo (<span class="currencySymbolDisplay">$</span>)</option>
-                                <option value="percent">Porcentaje (%)</option>
-                            </select>
-                        </div>
-
-                        <div class="w-full sm:w-auto ml-auto space-y-1.5 text-right font-semibold">
-                            <div class="flex justify-between sm:justify-end gap-6 text-slate-500">
-                                <span>Subtotal:</span>
-                                <span><span class="currencySymbolDisplay">$</span><span id="subtotalDisplay">0.00</span></span>
-                            </div>
-                            <div class="flex justify-between sm:justify-end gap-6 text-rose-600">
-                                <span>Descuento aplicado:</span>
-                                <span>-<span class="currencySymbolDisplay">$</span><span id="discountDisplay">0.00</span></span>
-                            </div>
-                            <div class="flex justify-between sm:justify-end gap-6 text-sm font-bold text-slate-900 pt-1 border-t border-slate-200">
-                                <span>TOTAL FINAL:</span>
-                                <span class="text-emerald-600"><span class="currencySymbolDisplay">$</span><span id="grandTotalDisplay">0.00</span></span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-
-    </main>
-
-    <!-- MODAL NUEVA CITA -->
-    <div id="newAppointmentModal" class="no-print fixed inset-0 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 space-y-4">
-            <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2">
-                    <i class="fa-solid fa-calendar-plus text-indigo-600"></i> Programar Nueva Cita
+</div>
+<div class="overflow-x-auto mb-4">
+<table class="w-full text-left text-xs border-collapse">
+<thead>
+<tr class="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200 text-[11px]">
+<th class="py-2 px-3">Tratamiento / Concepto</th>
+<th class="py-2 px-3 text-center w-20">Cant.</th>
+<th class="py-2 px-3 text-right w-28">Precio (<span class="currencySymbolDisplay">$</span>)</th>
+<th class="py-2 px-3 text-right w-28">Total (<span class="currencySymbolDisplay">$</span>)</th>
+<th class="py-2 px-3 text-center w-12 no-print"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100" id="budgetTableBody">
+</tbody>
+</table>
+</div>
+<div class="border-t border-slate-200 pt-3 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs">
+<div class="no-print flex items-center gap-2 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+<span class="font-bold text-slate-600">Descuento:</span>
+<input class="w-20 border border-slate-300 rounded-lg px-2 py-1 text-xs font-semibold focus:ring-2 focus:ring-emerald-500 outline-none" id="inputDiscountVal" min="0" oninput="updateDiscountConfig()" step="any" type="number" value="0"/>
+<select class="border border-slate-300 rounded-lg px-2 py-1 text-xs font-semibold bg-white cursor-pointer" id="selectDiscountType" onchange="updateDiscountConfig()">
+<option value="fixed">Monto Fijo (<span class="currencySymbolDisplay">$</span>)</option>
+<option value="percent">Porcentaje (%)</option>
+</select>
+</div>
+<div class="w-full sm:w-auto ml-auto space-y-1.5 text-right font-semibold">
+<div class="flex justify-between sm:justify-end gap-6 text-slate-500">
+<span>Subtotal:</span>
+<span><span class="currencySymbolDisplay">$</span><span id="subtotalDisplay">0.00</span></span>
+</div>
+<div class="flex justify-between sm:justify-end gap-6 text-rose-600">
+<span>Descuento aplicado:</span>
+<span>-<span class="currencySymbolDisplay">$</span><span id="discountDisplay">0.00</span></span>
+</div>
+<div class="flex justify-between sm:justify-end gap-6 text-sm font-bold text-slate-900 pt-1 border-t border-slate-200">
+<span>TOTAL FINAL:</span>
+<span class="text-emerald-600"><span class="currencySymbolDisplay">$</span><span id="grandTotalDisplay">0.00</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- MODAL NUEVA CITA -->
+<div class="no-print fixed inset-0 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center z-50 p-4" id="newAppointmentModal">
+<div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 space-y-4">
+<div class="flex justify-between items-center border-b pb-3">
+<h3 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+<i class="fa-solid fa-calendar-plus text-indigo-600"></i> Programar Nueva Cita
                 </h3>
-                <button onclick="closeNewAppointmentModal()" class="text-slate-400 hover:text-slate-600 text-base cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="space-y-3 text-xs">
-                <div>
-                    <label class="block font-medium text-slate-600 mb-1">Nombre del Paciente</label>
-                    <input type="text" id="appModalPatientName" class="w-full border border-slate-300 rounded-lg p-2 font-medium outline-none" placeholder="Nombre completo...">
-                </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <div>
-                        <label class="block font-medium text-slate-600 mb-1">Teléfono WhatsApp</label>
-                        <input type="text" id="appModalPatientPhone" class="w-full border border-slate-300 rounded-lg p-2 font-medium outline-none" placeholder="+51 9...">
-                    </div>
-                    <div>
-                        <label class="block font-medium text-slate-600 mb-1">Estado</label>
-                        <select id="appModalStatus" class="w-full border border-slate-300 rounded-lg p-2 font-semibold bg-white outline-none">
-                            <option value="Programada">Programada</option>
-                            <option value="Confirmada">Confirmada</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <div>
-                        <label class="block font-medium text-slate-600 mb-1">Fecha</label>
-                        <input type="date" id="appModalDate" class="w-full border border-slate-300 rounded-lg p-2 font-medium outline-none">
-                    </div>
-                    <div>
-                        <label class="block font-medium text-slate-600 mb-1">Hora</label>
-                        <input type="time" id="appModalTime" class="w-full border border-slate-300 rounded-lg p-2 font-medium outline-none" value="10:00">
-                    </div>
-                </div>
-                <div>
-                    <label class="block font-medium text-slate-600 mb-1">Tratamiento o Motivo</label>
-                    <input type="text" id="appModalReason" class="w-full border border-slate-300 rounded-lg p-2 font-medium outline-none" placeholder="Ej: Control de ortodoncia, Profilaxis...">
-                </div>
-            </div>
-            <div class="flex gap-2 pt-2">
-                <button onclick="closeNewAppointmentModal()" class="w-1/2 bg-slate-200 hover:bg-slate-300 text-slate-700 py-2 rounded-xl font-semibold cursor-pointer">Cancelar</button>
-                <button onclick="saveNewAppointment()" class="w-1/2 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-xl font-semibold cursor-pointer">Guardar Cita</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL GESTOR DE FIDELIZACIÓN (60 PILARES) -->
-    <div id="loyaltyManagerModal" class="no-print fixed inset-0 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-100 overflow-hidden">
-            <div class="bg-amber-600 text-white p-4 flex justify-between items-center">
-                <h2 class="text-base font-bold flex items-center gap-2">
-                    <i class="fa-solid fa-sliders"></i> Gestor de Fidelización (60 Pilares)
+<button class="text-slate-400 hover:text-slate-600 text-base cursor-pointer" onclick="closeNewAppointmentModal()"><i class="fa-solid fa-xmark"></i></button>
+</div>
+<div class="space-y-3 text-xs">
+<div>
+<label class="block font-medium text-slate-600 mb-1">Nombre del Paciente</label>
+<input class="w-full border border-slate-300 rounded-lg p-2 font-medium outline-none" id="appModalPatientName" placeholder="Nombre completo..." type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div>
+<label class="block font-medium text-slate-600 mb-1">Teléfono WhatsApp</label>
+<input class="w-full border border-slate-300 rounded-lg p-2 font-medium outline-none" id="appModalPatientPhone" placeholder="+51 9..." type="text"/>
+</div>
+<div>
+<label class="block font-medium text-slate-600 mb-1">Estado</label>
+<select class="w-full border border-slate-300 rounded-lg p-2 font-semibold bg-white outline-none" id="appModalStatus">
+<option value="Programada">Programada</option>
+<option value="Confirmada">Confirmada</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div>
+<label class="block font-medium text-slate-600 mb-1">Fecha</label>
+<input class="w-full border border-slate-300 rounded-lg p-2 font-medium outline-none" id="appModalDate" type="date"/>
+</div>
+<div>
+<label class="block font-medium text-slate-600 mb-1">Hora</label>
+<input class="w-full border border-slate-300 rounded-lg p-2 font-medium outline-none" id="appModalTime" type="time" value="10:00"/>
+</div>
+</div>
+<div>
+<label class="block font-medium text-slate-600 mb-1">Tratamiento o Motivo</label>
+<input class="w-full border border-slate-300 rounded-lg p-2 font-medium outline-none" id="appModalReason" placeholder="Ej: Control de ortodoncia, Profilaxis..." type="text"/>
+</div>
+</div>
+<div class="flex gap-2 pt-2">
+<button class="w-1/2 bg-slate-200 hover:bg-slate-300 text-slate-700 py-2 rounded-xl font-semibold cursor-pointer" onclick="closeNewAppointmentModal()">Cancelar</button>
+<button class="w-1/2 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-xl font-semibold cursor-pointer" onclick="saveNewAppointment()">Guardar Cita</button>
+</div>
+</div>
+</div>
+<!-- MODAL GESTOR DE FIDELIZACIÓN (60 PILARES) -->
+<div class="no-print fixed inset-0 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center z-50 p-4" id="loyaltyManagerModal">
+<div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-100 overflow-hidden">
+<div class="bg-amber-600 text-white p-4 flex justify-between items-center">
+<h2 class="text-base font-bold flex items-center gap-2">
+<i class="fa-solid fa-sliders"></i> Gestor de Fidelización (60 Pilares)
                 </h2>
-                <button onclick="closeLoyaltyManagerModal()" class="text-white/80 hover:text-white text-lg cursor-pointer">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="p-4 bg-slate-50 border-b border-slate-200 text-xs text-slate-600">
+<button class="text-white/80 hover:text-white text-lg cursor-pointer" onclick="closeLoyaltyManagerModal()">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<div class="p-4 bg-slate-50 border-b border-slate-200 text-xs text-slate-600">
                 Personaliza la imagen, edita o añade nuevas variaciones de mensajes para tus 60 estrategias de retención.
             </div>
-            <div class="p-6 overflow-y-auto flex-1 space-y-6 text-xs" id="loyaltyManagerList">
-            </div>
-            <div class="bg-slate-100 p-4 flex justify-end gap-2 border-t border-slate-200">
-                <button onclick="closeLoyaltyManagerModal()" class="px-5 py-2 bg-slate-300 hover:bg-slate-400 text-slate-700 rounded-xl font-semibold cursor-pointer">Cerrar</button>
-                <button onclick="saveLoyaltyCustomizations()" class="px-5 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-xl font-semibold cursor-pointer">Guardar Cambios</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL GESTOR DE MARKETING (60 CAMPAÑAS) -->
-    <div id="marketingManagerModal" class="no-print fixed inset-0 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-100 overflow-hidden">
-            <div class="bg-emerald-600 text-white p-4 flex justify-between items-center">
-                <h2 class="text-base font-bold flex items-center gap-2">
-                    <i class="fa-solid fa-bullhorn"></i> Gestor de Campañas de Marketing (60 Estrategias)
+<div class="p-6 overflow-y-auto flex-1 space-y-6 text-xs" id="loyaltyManagerList">
+</div>
+<div class="bg-slate-100 p-4 flex justify-end gap-2 border-t border-slate-200">
+<button class="px-5 py-2 bg-slate-300 hover:bg-slate-400 text-slate-700 rounded-xl font-semibold cursor-pointer" onclick="closeLoyaltyManagerModal()">Cerrar</button>
+<button class="px-5 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-xl font-semibold cursor-pointer" onclick="saveLoyaltyCustomizations()">Guardar Cambios</button>
+</div>
+</div>
+</div>
+<!-- MODAL GESTOR DE MARKETING (60 CAMPAÑAS) -->
+<div class="no-print fixed inset-0 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center z-50 p-4" id="marketingManagerModal">
+<div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-100 overflow-hidden">
+<div class="bg-emerald-600 text-white p-4 flex justify-between items-center">
+<h2 class="text-base font-bold flex items-center gap-2">
+<i class="fa-solid fa-bullhorn"></i> Gestor de Campañas de Marketing (60 Estrategias)
                 </h2>
-                <button onclick="closeMarketingManagerModal()" class="text-white/80 hover:text-white text-lg cursor-pointer">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="p-4 bg-slate-50 border-b border-slate-200 text-xs text-slate-600">
+<button class="text-white/80 hover:text-white text-lg cursor-pointer" onclick="closeMarketingManagerModal()">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<div class="p-4 bg-slate-50 border-b border-slate-200 text-xs text-slate-600">
                 Personaliza la imagen, edita o añade nuevas variaciones para tus 60 campañas de marketing conversivo.
             </div>
-            <div class="p-6 overflow-y-auto flex-1 space-y-6 text-xs" id="marketingManagerList">
-            </div>
-            <div class="bg-slate-100 p-4 flex justify-end gap-2 border-t border-slate-200">
-                <button onclick="closeMarketingManagerModal()" class="px-5 py-2 bg-slate-300 hover:bg-slate-400 text-slate-700 rounded-xl font-semibold cursor-pointer">Cerrar</button>
-                <button onclick="saveMarketingCustomizations()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold cursor-pointer">Guardar Cambios</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL CONSENTIMIENTOS -->
-    <div id="consentModal" class="no-print fixed inset-0 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-100 overflow-hidden">
-            <div class="bg-indigo-700 text-white p-4 flex justify-between items-center">
-                <h2 class="text-base font-bold flex items-center gap-2">
-                    <i class="fa-solid fa-file-signature"></i> Consentimientos Informados (Editables)
+<div class="p-6 overflow-y-auto flex-1 space-y-6 text-xs" id="marketingManagerList">
+</div>
+<div class="bg-slate-100 p-4 flex justify-end gap-2 border-t border-slate-200">
+<button class="px-5 py-2 bg-slate-300 hover:bg-slate-400 text-slate-700 rounded-xl font-semibold cursor-pointer" onclick="closeMarketingManagerModal()">Cerrar</button>
+<button class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold cursor-pointer" onclick="saveMarketingCustomizations()">Guardar Cambios</button>
+</div>
+</div>
+</div>
+<!-- MODAL CONSENTIMIENTOS -->
+<div class="no-print fixed inset-0 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center z-50 p-4" id="consentModal">
+<div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-100 overflow-hidden">
+<div class="bg-indigo-700 text-white p-4 flex justify-between items-center">
+<h2 class="text-base font-bold flex items-center gap-2">
+<i class="fa-solid fa-file-signature"></i> Consentimientos Informados (Editables)
                 </h2>
-                <button onclick="closeConsentModal()" class="text-white/80 hover:text-white text-lg cursor-pointer">
-                    <i class="fa-solid fa-xmark"></i>
+<button class="text-white/80 hover:text-white text-lg cursor-pointer" onclick="closeConsentModal()">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<div class="p-4 bg-slate-50 border-b border-slate-200 flex flex-wrap gap-3 items-center">
+<label class="text-xs font-bold text-slate-700">Seleccionar Tratamiento:</label>
+<select class="border border-slate-300 rounded-xl p-2 text-xs font-semibold bg-white flex-1 outline-none" id="consentTreatmentSelect" onchange="loadConsentTemplate(this.value)">
+</select>
+<button class="bg-slate-800 text-white text-xs px-3.5 py-2 rounded-xl font-bold flex items-center gap-1.5 cursor-pointer" onclick="printConsentDocument()">
+<i class="fa-solid fa-print"></i> Imprimir Consentimiento
                 </button>
-            </div>
-            
-            <div class="p-4 bg-slate-50 border-b border-slate-200 flex flex-wrap gap-3 items-center">
-                <label class="text-xs font-bold text-slate-700">Seleccionar Tratamiento:</label>
-                <select id="consentTreatmentSelect" onchange="loadConsentTemplate(this.value)" class="border border-slate-300 rounded-xl p-2 text-xs font-semibold bg-white flex-1 outline-none">
-                </select>
-                <button onclick="printConsentDocument()" class="bg-slate-800 text-white text-xs px-3.5 py-2 rounded-xl font-bold flex items-center gap-1.5 cursor-pointer">
-                    <i class="fa-solid fa-print"></i> Imprimir Consentimiento
+</div>
+<div class="p-3 bg-amber-50 border-b border-amber-200 flex items-center gap-2">
+<input class="border border-amber-300 rounded-lg px-3 py-1.5 text-xs flex-1 outline-none bg-white font-medium" id="newConsentTitleInput" placeholder="Título para nueva plantilla de consentimiento..." type="text"/>
+<button class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-3.5 py-1.5 rounded-lg font-bold flex items-center gap-1 cursor-pointer" onclick="addNewCustomConsentTemplate()">
+<i class="fa-solid fa-plus"></i> + Crear Plantilla
                 </button>
-            </div>
-
-            <div class="p-3 bg-amber-50 border-b border-amber-200 flex items-center gap-2">
-                <input type="text" id="newConsentTitleInput" placeholder="Título para nueva plantilla de consentimiento..." class="border border-amber-300 rounded-lg px-3 py-1.5 text-xs flex-1 outline-none bg-white font-medium">
-                <button onclick="addNewCustomConsentTemplate()" class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-3.5 py-1.5 rounded-lg font-bold flex items-center gap-1 cursor-pointer">
-                    <i class="fa-solid fa-plus"></i> + Crear Plantilla
-                </button>
-            </div>
-
-            <div class="p-6 overflow-y-auto flex-1 text-xs space-y-4 text-slate-700" id="consentBodyContent">
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL LISTA PACIENTES -->
-    <div id="patientListModal" class="no-print fixed inset-0 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-slate-100 overflow-hidden">
-            <div class="bg-indigo-700 text-white p-4 flex justify-between items-center">
-                <h2 class="text-base font-bold flex items-center gap-2">
-                    <i class="fa-solid fa-folder-open"></i> Historial de Pacientes Guardados
+</div>
+<div class="p-6 overflow-y-auto flex-1 text-xs space-y-4 text-slate-700" id="consentBodyContent">
+</div>
+</div>
+</div>
+<!-- MODAL LISTA PACIENTES -->
+<div class="no-print fixed inset-0 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center z-50 p-4" id="patientListModal">
+<div class="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-slate-100 overflow-hidden">
+<div class="bg-indigo-700 text-white p-4 flex justify-between items-center">
+<h2 class="text-base font-bold flex items-center gap-2">
+<i class="fa-solid fa-folder-open"></i> Historial de Pacientes Guardados
                 </h2>
-                <button onclick="closePatientListModal()" class="text-white/80 hover:text-white text-lg cursor-pointer">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="p-4 border-b border-slate-100">
-                <input type="text" id="searchPatientInput" oninput="filterPatientsList(this.value)" placeholder="Buscar por nombre, documento o número de HC..." class="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-indigo-500">
-            </div>
-            <div class="p-4 overflow-y-auto space-y-2 flex-1" id="patientListContainer">
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL AJUSTES & TARIFAS -->
-    <div id="settingsModal" class="no-print fixed inset-0 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-100 overflow-hidden">
-            
-            <div class="bg-indigo-700 text-white p-4 flex justify-between items-center">
-                <h2 class="text-base font-bold flex items-center gap-2">
-                    <i class="fa-solid fa-sliders"></i> Configuración de Clínica, Estados y Tarifas
+<button class="text-white/80 hover:text-white text-lg cursor-pointer" onclick="closePatientListModal()">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<div class="p-4 border-b border-slate-100">
+<input class="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-indigo-500" id="searchPatientInput" oninput="filterPatientsList(this.value)" placeholder="Buscar por nombre, documento o número de HC..." type="text"/>
+</div>
+<div class="p-4 overflow-y-auto space-y-2 flex-1" id="patientListContainer">
+</div>
+</div>
+</div>
+<!-- MODAL AJUSTES & TARIFAS -->
+<div class="no-print fixed inset-0 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center z-50 p-4" id="settingsModal">
+<div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-100 overflow-hidden">
+<div class="bg-indigo-700 text-white p-4 flex justify-between items-center">
+<h2 class="text-base font-bold flex items-center gap-2">
+<i class="fa-solid fa-sliders"></i> Configuración de Clínica, Estados y Tarifas
                 </h2>
-                <button onclick="closeSettingsModal()" class="text-white/80 hover:text-white text-lg cursor-pointer">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <div class="p-5 overflow-y-auto space-y-6 text-xs">
-                <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                    <h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider text-indigo-600">1. Datos Generales de la Clínica</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label class="block font-medium text-slate-600 mb-1">Nombre de la App / Clínica</label>
-                            <input type="text" id="settingClinicName" class="w-full border border-slate-300 rounded-lg p-2 font-semibold text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
-                        </div>
-                        <div>
-                            <label class="block font-medium text-slate-600 mb-1">Símbolo de Moneda</label>
-                            <input type="text" id="settingCurrency" class="w-full border border-slate-300 rounded-lg p-2 font-semibold text-xs focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="$, S/, €, etc.">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                    <h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider text-indigo-600">2. Logo de la Clínica</h3>
-                    <div class="flex flex-wrap items-center gap-3">
-                        <div id="settingsLogoContainer" class="hidden w-16 h-16 bg-white border border-slate-200 rounded-xl items-center justify-center overflow-hidden"><img id="settingsLogoPreview" class="hidden w-full h-full object-contain" alt="Vista previa del logo"></div>
-                        <div class="flex-1 min-w-52"><input id="settingLogoFile" type="file" accept="image/png,image/jpeg,image/webp" onchange="handleLogoFileChange(event)" class="block w-full text-xs border border-slate-300 rounded-lg p-2 bg-white"><p class="text-[10px] text-slate-500 mt-1">PNG, JPG o WEBP; máximo 2 MB.</p></div>
-                        <button type="button" onclick="removeCustomLogo()" class="bg-rose-100 text-rose-700 hover:bg-rose-200 px-3 py-2 rounded-lg font-semibold cursor-pointer">Quitar logo</button>
-                    </div>
-                </div>
-                <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider text-indigo-600">3. Estados Clínicos & Colores</h3>
-                        <button onclick="addNewClinicalStateSetting()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-2.5 py-1 rounded-lg font-semibold text-[11px] cursor-pointer">
+<button class="text-white/80 hover:text-white text-lg cursor-pointer" onclick="closeSettingsModal()">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<div class="p-5 overflow-y-auto space-y-6 text-xs">
+<div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+<h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider text-indigo-600">1. Datos Generales de la Clínica</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div>
+<label class="block font-medium text-slate-600 mb-1">Nombre de la App / Clínica</label>
+<input class="w-full border border-slate-300 rounded-lg p-2 font-semibold text-xs focus:ring-2 focus:ring-indigo-500 outline-none" id="settingClinicName" type="text"/>
+</div>
+<div>
+<label class="block font-medium text-slate-600 mb-1">Símbolo de Moneda</label>
+<input class="w-full border border-slate-300 rounded-lg p-2 font-semibold text-xs focus:ring-2 focus:ring-indigo-500 outline-none" id="settingCurrency" placeholder="$, S/, €, etc." type="text"/>
+</div>
+</div>
+</div>
+<div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+<h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider text-indigo-600">2. Logo de la Clínica</h3>
+<div class="flex flex-wrap items-center gap-3">
+<div class="hidden w-16 h-16 bg-white border border-slate-200 rounded-xl items-center justify-center overflow-hidden" id="settingsLogoContainer"><img alt="Vista previa del logo" class="hidden w-full h-full object-contain" id="settingsLogoPreview"/></div>
+<div class="flex-1 min-w-52"><input accept="image/png,image/jpeg,image/webp" class="block w-full text-xs border border-slate-300 rounded-lg p-2 bg-white" id="settingLogoFile" onchange="handleLogoFileChange(event)" type="file"/><p class="text-[10px] text-slate-500 mt-1">PNG, JPG o WEBP; máximo 2 MB.</p></div>
+<button class="bg-rose-100 text-rose-700 hover:bg-rose-200 px-3 py-2 rounded-lg font-semibold cursor-pointer" onclick="removeCustomLogo()" type="button">Quitar logo</button>
+</div>
+</div>
+<div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+<div class="flex justify-between items-center">
+<h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider text-indigo-600">3. Estados Clínicos &amp; Colores</h3>
+<button class="bg-indigo-600 hover:bg-indigo-700 text-white px-2.5 py-1 rounded-lg font-semibold text-[11px] cursor-pointer" onclick="addNewClinicalStateSetting()">
                             + Agregar Estado
                         </button>
-                    </div>
-                    <div class="space-y-2 max-h-56 overflow-y-auto pr-1" id="settingsStatesContainer">
-                    </div>
-                </div>
-
-                <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider text-emerald-600">4. Tarifario de Tratamientos (Presupuesto)</h3>
-                        <button onclick="addNewTariffSetting()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-2.5 py-1 rounded-lg font-semibold text-[11px] cursor-pointer">
+</div>
+<div class="space-y-2 max-h-56 overflow-y-auto pr-1" id="settingsStatesContainer">
+</div>
+</div>
+<div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+<div class="flex justify-between items-center">
+<h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider text-emerald-600">4. Tarifario de Tratamientos (Presupuesto)</h3>
+<button class="bg-emerald-600 hover:bg-emerald-700 text-white px-2.5 py-1 rounded-lg font-semibold text-[11px] cursor-pointer" onclick="addNewTariffSetting()">
                             + Agregar Tratamiento
                         </button>
-                    </div>
-                    <div class="space-y-2 max-h-52 overflow-y-auto pr-1" id="settingsTariffsContainer">
-                    </div>
-                </div>
-                <div class="space-y-3 bg-amber-50 p-4 rounded-xl border border-amber-200">
-                    <h3 class="font-bold text-amber-800 text-xs uppercase tracking-wider">5. Copia de Seguridad Completa</h3>
-                    <p class="text-[11px] text-amber-900">Incluye pacientes, ficha, citas, campañas, fidelización, configuraciones y logo. Importar reemplaza los datos locales de esta app.</p>
-                    <div class="flex flex-wrap gap-2"><button type="button" onclick="exportFullDatabase()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg font-semibold cursor-pointer hover:bg-emerald-700">Exportar base completa</button><button type="button" onclick="document.getElementById('databaseImportFile').click()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold cursor-pointer hover:bg-indigo-700">Importar base completa</button><input id="databaseImportFile" type="file" accept=".json,application/json" onchange="handleDatabaseImport(event)" class="hidden"></div>
-                </div>
-            </div>
-
-            <div class="bg-slate-100 p-4 flex justify-between items-center border-t border-slate-200">
-                <button onclick="restoreDefaultSettings()" class="text-rose-600 hover:underline text-xs font-semibold cursor-pointer">
+</div>
+<div class="space-y-2 max-h-52 overflow-y-auto pr-1" id="settingsTariffsContainer">
+</div>
+</div>
+<div class="space-y-3 bg-amber-50 p-4 rounded-xl border border-amber-200">
+<h3 class="font-bold text-amber-800 text-xs uppercase tracking-wider">5. Copia de Seguridad Completa</h3>
+<p class="text-[11px] text-amber-900">Incluye pacientes, ficha, citas, campañas, fidelización, configuraciones y logo. Importar reemplaza los datos locales de esta app.</p>
+<div class="flex flex-wrap gap-2"><button class="bg-emerald-600 text-white px-4 py-2 rounded-lg font-semibold cursor-pointer hover:bg-emerald-700" onclick="exportFullDatabase()" type="button">Exportar base completa</button><button class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold cursor-pointer hover:bg-indigo-700" onclick="document.getElementById('databaseImportFile').click()" type="button">Importar base completa</button><input accept=".json,application/json" class="hidden" id="databaseImportFile" onchange="handleDatabaseImport(event)" type="file"/></div>
+</div>
+</div>
+<div class="bg-slate-100 p-4 flex justify-between items-center border-t border-slate-200">
+<button class="text-rose-600 hover:underline text-xs font-semibold cursor-pointer" onclick="restoreDefaultSettings()">
                     Restablecer Fábrica
                 </button>
-                <div class="flex gap-2">
-                    <button onclick="closeSettingsModal()" class="px-4 py-2 bg-slate-300 hover:bg-slate-400 text-slate-700 rounded-xl font-semibold cursor-pointer">Cancelar</button>
-                    <button onclick="saveSettingsFromModal()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold cursor-pointer">Guardar Cambios</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODALES DE ALERTA Y CONFIRMACIÓN -->
-    <div id="alertModal" class="no-print fixed inset-0 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl p-5 max-w-xs w-full text-center shadow-xl">
-            <div id="alertIcon" class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto mb-2 text-lg">
-                <i class="fa-solid fa-circle-check"></i>
-            </div>
-            <h3 id="alertTitle" class="text-sm font-bold text-slate-800 mb-1">Notificación</h3>
-            <p id="alertMsg" class="text-xs text-slate-500 mb-4">Mensaje de confirmación...</p>
-            <button onclick="closeAlertModal()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs py-2 rounded-xl font-semibold cursor-pointer">Aceptar</button>
-        </div>
-    </div>
-
-    <div id="confirmModal" class="no-print fixed inset-0 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl p-5 max-w-sm w-full text-center shadow-xl">
-            <div class="w-10 h-10 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center mx-auto mb-2 text-lg">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-            </div>
-            <h3 id="confirmTitle" class="text-sm font-bold text-slate-800 mb-1">¿Está seguro?</h3>
-            <p id="confirmMsg" class="text-xs text-slate-500 mb-5">Esta acción no se puede deshacer.</p>
-            <div class="flex gap-2">
-                <button onclick="closeConfirmModal(false)" class="w-1/2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs py-2 rounded-xl font-semibold cursor-pointer">Cancelar</button>
-                <button id="confirmActionBtn" onclick="closeConfirmModal(true)" class="w-1/2 bg-rose-600 hover:bg-rose-700 text-white text-xs py-2 rounded-xl font-semibold cursor-pointer">Confirmar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ÁREA DE IMPRESIÓN EXCLUSIVA CONSENTIMIENTOS -->
-    <div id="consentPrintArea" class="hidden"></div>
-
-    <!-- BOTÓN FLOTANTE GUARDAR PACIENTE -->
-    <div id="floatingSaveBtn" class="no-print hidden fixed bottom-6 right-6 z-40 transition-transform transform translate-y-0">
-        <button onclick="manualSavePatient()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-4 rounded-2xl shadow-[0_10px_25px_rgba(16,185,129,0.5)] font-bold flex items-center gap-3 border-2 border-emerald-300 transition-all hover:scale-105 animate-bounce cursor-pointer">
-            <i class="fa-solid fa-floppy-disk text-2xl"></i>
-            <div class="text-left">
-                <span class="block text-sm leading-tight uppercase tracking-wider text-emerald-100">Click para</span>
-                <span class="block text-lg leading-tight">Guardar Paciente</span>
-            </div>
-        </button>
-    </div>
-
-    <script>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-slate-300 hover:bg-slate-400 text-slate-700 rounded-xl font-semibold cursor-pointer" onclick="closeSettingsModal()">Cancelar</button>
+<button class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold cursor-pointer" onclick="saveSettingsFromModal()">Guardar Cambios</button>
+</div>
+</div>
+</div>
+</div>
+<!-- MODALES DE ALERTA Y CONFIRMACIÓN -->
+<div class="no-print fixed inset-0 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center z-50 p-4" id="alertModal">
+<div class="bg-white rounded-2xl p-5 max-w-xs w-full text-center shadow-xl">
+<div class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto mb-2 text-lg" id="alertIcon">
+<i class="fa-solid fa-circle-check"></i>
+</div>
+<h3 class="text-sm font-bold text-slate-800 mb-1" id="alertTitle">Notificación</h3>
+<p class="text-xs text-slate-500 mb-4" id="alertMsg">Mensaje de confirmación...</p>
+<button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs py-2 rounded-xl font-semibold cursor-pointer" onclick="closeAlertModal()">Aceptar</button>
+</div>
+</div>
+<div class="no-print fixed inset-0 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center z-50 p-4" id="confirmModal">
+<div class="bg-white rounded-2xl p-5 max-w-sm w-full text-center shadow-xl">
+<div class="w-10 h-10 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center mx-auto mb-2 text-lg">
+<i class="fa-solid fa-triangle-exclamation"></i>
+</div>
+<h3 class="text-sm font-bold text-slate-800 mb-1" id="confirmTitle">¿Está seguro?</h3>
+<p class="text-xs text-slate-500 mb-5" id="confirmMsg">Esta acción no se puede deshacer.</p>
+<div class="flex gap-2">
+<button class="w-1/2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs py-2 rounded-xl font-semibold cursor-pointer" onclick="closeConfirmModal(false)">Cancelar</button>
+<button class="w-1/2 bg-rose-600 hover:bg-rose-700 text-white text-xs py-2 rounded-xl font-semibold cursor-pointer" id="confirmActionBtn" onclick="closeConfirmModal(true)">Confirmar</button>
+</div>
+</div>
+</div>
+<!-- ÁREA DE IMPRESIÓN EXCLUSIVA CONSENTIMIENTOS -->
+<div class="hidden" id="consentPrintArea"></div>
+<!-- BOTÓN FLOTANTE GUARDAR PACIENTE -->
+<div class="no-print hidden fixed bottom-6 right-6 z-40 transition-transform transform translate-y-0" id="floatingSaveBtn">
+<button class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-4 rounded-2xl shadow-[0_10px_25px_rgba(16,185,129,0.5)] font-bold flex items-center gap-3 border-2 border-emerald-300 transition-all hover:scale-105 animate-bounce cursor-pointer" onclick="manualSavePatient()">
+<i class="fa-solid fa-floppy-disk text-2xl"></i>
+<div class="text-left">
+<span class="block text-sm leading-tight uppercase tracking-wider text-emerald-100">Click para</span>
+<span class="block text-lg leading-tight">Guardar Paciente</span>
+</div>
+</button>
+</div>
+<script>
         const SETTINGS_KEY = 'odontoflow_settings_local_v15';
         const CURRENT_PATIENT_KEY = 'odontoflow_current_patient_local_v15';
         const ALL_PATIENTS_KEY = 'odontoflow_all_patients_local_v15';
@@ -1219,6 +1134,8 @@
             { id: 59, name: "59. Eliminación de Manchas AirFlow", badge: "Limpieza", imageUrl: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", templates: ["☕ ¿Manchas de café o tabaco difíciles? Prueba la limpieza con aeropulidor AirFlow en [CLINIC_NAME]. Indoloro y altamente eficaz. 🌬️"] },
             { id: 60, name: "60. Flash Sale: 2x1 en Selladores", badge: "Pediatría", imageUrl: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80", templates: ["🧸 ¡Protección x2! Este fin de semana, selladores preventivos 2x1 para niños en [CLINIC_NAME]. ¡Trae a los hermanitos y blinda sus muelas! 🛡️"] }
         ];
+        DEFAULT_MARKETING_CAMPAIGNS.push(...[{"id": 21, "name": "21. Evaluación de ortodoncia", "badge": "Ortodoncia", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], en [CLINIC_NAME] podemos evaluar tu mordida y explicarte las opciones de ortodoncia según tu caso. ¿Deseas coordinar una consulta?"]}, {"id": 22, "name": "22. Consulta de ortopedia maxilar", "badge": "Ortopedia", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], te invitamos a una evaluación del crecimiento y la mordida de tu hijo en [CLINIC_NAME]. La indicación se define después de la consulta."]}, {"id": 23, "name": "23. Valoración de carillas", "badge": "Estética", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], ¿te gustaría conocer las opciones para mejorar tu sonrisa? En [CLINIC_NAME] evaluamos si las carillas u otras alternativas son adecuadas para ti."]}, {"id": 24, "name": "24. Consulta sobre sensibilidad", "badge": "Consulta", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], si has notado sensibilidad dental, puedes reservar una evaluación en [CLINIC_NAME] para revisar su causa y las opciones de atención."]}, {"id": 25, "name": "25. Revisión de encías", "badge": "Periodoncia", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], si tus encías sangran o te preocupan, agenda una revisión en [CLINIC_NAME]. Te explicaremos los hallazgos y el plan recomendado."]}, {"id": 26, "name": "26. Valoración de implantes", "badge": "Implantes", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], en [CLINIC_NAME] te ofrecemos una consulta para conocer las alternativas de reemplazo dental, incluidos implantes cuando estén indicados."]}, {"id": 27, "name": "27. Opciones de prótesis", "badge": "Prótesis", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], podemos revisar contigo las opciones de prótesis fija o removible en [CLINIC_NAME]. Coordina una evaluación para recibir un plan personalizado."]}, {"id": 28, "name": "28. Primera consulta infantil", "badge": "Pediatría", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], agenda la consulta odontológica de tu hijo en [CLINIC_NAME]. Queremos que conozca el consultorio y recibirlos con una atención adaptada a su edad."]}, {"id": 29, "name": "29. Evaluación de terceros molares", "badge": "Cirugía", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], si tienes molestias o dudas sobre tus muelas de juicio, agenda una evaluación en [CLINIC_NAME]. Te explicaremos si requieren tratamiento."]}, {"id": 30, "name": "30. Valoración de bruxismo", "badge": "ATM", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], si notas desgaste dental o aprietas los dientes, podemos realizar una evaluación en [CLINIC_NAME] y conversar sobre las opciones de manejo."]}, {"id": 31, "name": "31. Alternativas de blanqueamiento", "badge": "Estética", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], consulta en [CLINIC_NAME] si un blanqueamiento es adecuado para tus dientes y conoce sus cuidados y limitaciones."]}, {"id": 32, "name": "32. Revisión de restauraciones", "badge": "Restauradora", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], agenda una evaluación de tus restauraciones en [CLINIC_NAME]. Revisaremos su estado antes de recomendar cualquier cambio."]}, {"id": 33, "name": "33. Atención por dolor dental", "badge": "Consulta", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], si tienes dolor dental, contacta a [CLINIC_NAME] para consultar la disponibilidad de atención. El tratamiento se define tras la evaluación."]}, {"id": 34, "name": "34. Evaluación de endodoncia", "badge": "Endodoncia", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], en [CLINIC_NAME] podemos evaluar una pieza que te preocupa y explicarte si necesita tratamiento de conducto u otra alternativa."]}, {"id": 35, "name": "35. Diseño de sonrisa personalizado", "badge": "Estética", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], solicita una consulta de planificación estética en [CLINIC_NAME]. Revisaremos tus objetivos y las opciones disponibles para tu caso."]}, {"id": 36, "name": "36. Plan de atención familiar", "badge": "Familia", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], coordina las evaluaciones odontológicas de tu familia en [CLINIC_NAME]. Consulta horarios disponibles para organizar sus citas."]}, {"id": 37, "name": "37. Presupuesto explicado", "badge": "Información", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], en [CLINIC_NAME] podemos explicarte tu presupuesto, las etapas propuestas y las alternativas de tratamiento. ¿Coordinamos una consulta?"]}, {"id": 38, "name": "38. Consulta de segunda opinión", "badge": "Consulta", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], si necesitas comprender un diagnóstico o plan odontológico, puedes solicitar una valoración en [CLINIC_NAME]. Trae tus estudios previos si los tienes."]}, {"id": 39, "name": "39. Evaluación de retenedores", "badge": "Ortodoncia", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], si tu retenedor no ajusta o necesitas revisar su estado, coordina una evaluación en [CLINIC_NAME] antes de realizar cambios."]}, {"id": 40, "name": "40. Rehabilitación de dientes ausentes", "badge": "Rehabilitación", "imageUrl": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80", "templates": ["Hola [PATIENT_NAME], conoce las alternativas para reemplazar dientes ausentes en [CLINIC_NAME]. Te explicaremos las opciones indicadas según tu evaluación."]}]);
+        DEFAULT_MARKETING_CAMPAIGNS.sort((a,b) => a.id - b.id);
 
         let appSettings = JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
         let loyaltyConfig = JSON.parse(JSON.stringify(DEFAULT_LOYALTY_PILLARS));
@@ -1275,14 +1192,25 @@
         });
 
         function switchTab(tabName) {
-            ['viewDashboard', 'viewAgenda', 'viewLoyalty', 'viewMarketing', 'viewClinical'].forEach(id => document.getElementById(id).classList.add('hidden'));
+            ['viewDashboard', 'viewAgenda', 'viewLoyalty', 'viewClinical'].forEach(id => document.getElementById(id).classList.add('hidden'));
             const floatingSaveBtn = document.getElementById('floatingSaveBtn');
             if (floatingSaveBtn) floatingSaveBtn.classList.toggle('hidden', tabName !== 'clinical');
             if (tabName === 'dashboard') { updateDashboardData(); document.getElementById('viewDashboard').classList.remove('hidden'); }
             else if (tabName === 'agenda') { renderAppointmentsList(); document.getElementById('viewAgenda').classList.remove('hidden'); }
-            else if (tabName === 'loyalty') { renderLoyaltyCards(); document.getElementById('viewLoyalty').classList.remove('hidden'); }
-            else if (tabName === 'marketing') { renderMarketingCards(); document.getElementById('viewMarketing').classList.remove('hidden'); }
+            else if (tabName === 'loyalty' || tabName === 'marketing') { document.getElementById('viewLoyalty').classList.remove('hidden'); showLoyaltySection(tabName === 'marketing' ? 'marketing' : 'retention'); }
             else { document.getElementById('viewClinical').classList.remove('hidden'); }
+        }
+        function showLoyaltySection(section) {
+            const marketing = section === 'marketing';
+            document.getElementById('loyaltyRetentionContent').classList.toggle('hidden', marketing);
+            document.getElementById('viewMarketing').classList.toggle('hidden', !marketing);
+            document.getElementById('loyaltyRetentionTab').className = 'px-4 py-2 rounded-lg text-sm ' + (!marketing ? 'bg-amber-600 text-white' : 'bg-slate-100 text-slate-700');
+            document.getElementById('loyaltyMarketingTab').className = 'px-4 py-2 rounded-lg text-sm ' + (marketing ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-700');
+            if (marketing) renderMarketingCards(); else renderLoyaltyCards();
+        }
+        function updateBudgetRowTotal(item) {
+            const cell = Array.from(document.querySelectorAll('[data-budget-total]')).find(el => el.dataset.budgetTotal === String(item.id));
+            if (cell) cell.textContent = appSettings.currencySymbol + ((item.qty || 0) * (item.price || 0)).toFixed(2);
         }
 
         function loadLoyaltyConfigFromStorage() {
@@ -1463,6 +1391,12 @@
                 try { marketingConfig = JSON.parse(stored); } catch (e) { marketingConfig = JSON.parse(JSON.stringify(DEFAULT_MARKETING_CAMPAIGNS)); }
             } else {
                 marketingConfig = JSON.parse(JSON.stringify(DEFAULT_MARKETING_CAMPAIGNS));
+            }
+            const legacyIds = [...Array.from({length:20},(_,i)=>i+1), ...Array.from({length:20},(_,i)=>i+41)];
+            if (Array.isArray(marketingConfig) && marketingConfig.length === 40 && legacyIds.every(id => marketingConfig.some(c => c.id === id))) {
+                marketingConfig.push(...JSON.parse(JSON.stringify(DEFAULT_MARKETING_CAMPAIGNS.filter(c => c.id >= 21 && c.id <= 40))));
+                marketingConfig.sort((a,b) => a.id - b.id);
+                saveMarketingConfigToStorage();
             }
         }
 
@@ -2444,7 +2378,18 @@
             return wrap;
         }
 
+        const ODONTO_ICON_OPTIONS = [
+            ['fa-tooth', 'Diente'], ['fa-triangle-exclamation', 'Alerta / caries'],
+            ['fa-bolt', 'Rayo / endodoncia'], ['fa-circle', 'Círculo / obturación'],
+            ['fa-crown', 'Corona'], ['fa-xmark', 'X / ausente'], ['fa-check', 'Chequeo'],
+            ['fa-star', 'Estrella'], ['fa-square', 'Cuadrado'], ['fa-plus', 'Cruz'],
+            ['fa-minus', 'Línea'], ['fa-screwdriver-wrench', 'Herramientas'],
+            ['fa-shield-halved', 'Protección'], ['fa-diamond', 'Rombo']
+        ];
         function getIconForState(stateId) {
+            const custom = appSettings.clinicalStates.find(st => st.id === stateId)?.icon;
+            if (ODONTO_ICON_OPTIONS.some(option => option[0] === custom)) return 'fa-solid ' + custom;
+
             if (stateId.includes('caries')) return 'fa-solid fa-triangle-exclamation text-rose-500';
             if (stateId.includes('endo')) return 'fa-solid fa-bolt text-blue-500';
             if (stateId.includes('resina')) return 'fa-solid fa-circle text-amber-500';
@@ -2593,7 +2538,7 @@
                     <td class="py-2 px-3 text-right">
                         <input type="number" min="0" step="any" value="${item.price}" oninput="updateBudgetItemPrice('${item.id}', this.value)" class="w-20 text-right border border-slate-300 rounded-md p-1 text-xs font-semibold">
                     </td>
-                    <td class="py-2 px-3 text-right font-bold text-slate-800">
+                    <td data-budget-total="${escapeHtml(item.id)}" class="py-2 px-3 text-right font-bold text-slate-800">
                         ${appSettings.currencySymbol}${total.toFixed(2)}
                     </td>
                     <td class="py-2 px-3 text-center no-print">
@@ -2625,12 +2570,12 @@
 
         function updateBudgetItemQty(itemId, val) {
             const item = patientData.budgetItems.find(i => i.id === itemId);
-            if (item) { item.qty = parseFloat(val) || 1; renderBudgetTable(); updateTotals(); }
+            if (item) { const number = parseFloat(val); item.qty = Number.isFinite(number) ? Math.max(0, number) : 0; updateBudgetRowTotal(item); updateTotals(); }
         }
 
         function updateBudgetItemPrice(itemId, val) {
             const item = patientData.budgetItems.find(i => i.id === itemId);
-            if (item) { item.price = parseFloat(val) || 0; renderBudgetTable(); updateTotals(); }
+            if (item) { const number = parseFloat(val); item.price = Number.isFinite(number) ? Math.max(0, number) : 0; updateBudgetRowTotal(item); updateTotals(); }
         }
 
         function updateDiscountConfig() {
@@ -2801,7 +2746,8 @@
                 renderBudgetTable();
                 updateTotals();
                 closePatientListModal();
-                showAlert("Paciente Cargado", `Se abrió la ficha de ${patientData.name || patientData.id}`);
+                switchTab('clinical');
+                document.querySelector('main').scrollTop = 0;
             }
         }
 
@@ -2863,6 +2809,16 @@
                     </div>
                     <button onclick="deleteClinicalStateSetting(${idx})" class="text-rose-500 hover:text-rose-700 text-xs p-1 cursor-pointer"><i class="fa-solid fa-trash-can"></i></button>
                 `;
+                const iconBox = document.createElement('label');
+                iconBox.className = 'flex items-center gap-2 w-full text-xs text-slate-600';
+                iconBox.appendChild(document.createTextNode('Icono del odontograma: '));
+                const preview = document.createElement('i'); preview.className = getIconForState(st.id);
+                const select = document.createElement('select'); select.className = 'border rounded p-1 bg-white';
+                const defaultOption = document.createElement('option'); defaultOption.value = ''; defaultOption.textContent = 'Automático (original)'; select.appendChild(defaultOption);
+                ODONTO_ICON_OPTIONS.forEach(([value, label]) => { const option = document.createElement('option'); option.value = value; option.textContent = label; select.appendChild(option); });
+                select.value = st.icon || '';
+                select.onchange = () => { st.icon = select.value; preview.className = getIconForState(st.id); };
+                iconBox.appendChild(preview); iconBox.appendChild(select); div.appendChild(iconBox);
                 container.appendChild(div);
             });
         }
@@ -3002,5 +2958,33 @@
             return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
         }
     </script>
+<div id="ofVisitModal" class="fixed inset-0 hidden items-center justify-center bg-slate-900/70 p-4 z-[60] no-print"><div class="bg-white p-5 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"><h2 class="font-bold">Registrar tratamiento realizado</h2><p id="ofVisitPatient" class="text-indigo-700 text-sm my-3"></p><form onsubmit="ofSaveVisit(event)" class="space-y-3 text-sm"><div class="grid grid-cols-2 gap-3"><label>Fecha<input id="ofVisitDate" required type="date" class="block border p-2 rounded w-full"></label><label>Hora<input id="ofVisitTime" required type="time" class="block border p-2 rounded w-full"></label></div><label class="block">Tratamiento<input id="ofVisitType" list="ofVisitTypes" required maxlength="200" class="block border p-2 rounded w-full"></label><datalist id="ofVisitTypes"></datalist><div class="grid grid-cols-2 gap-3"><label>Piezas / zona<input id="ofVisitTeeth" maxlength="200" class="block border p-2 rounded w-full"></label><label>Profesional<input id="ofVisitDoctor" maxlength="200" class="block border p-2 rounded w-full"></label></div><label class="block">Evolución e indicaciones<textarea id="ofVisitNotes" rows="4" maxlength="10000" class="block border p-2 rounded w-full"></textarea></label><div class="flex flex-wrap gap-2"><button type="button" onclick="ofStartCamera()" class="bg-indigo-600 text-white p-2 rounded">Abrir cámara</button><button type="button" onclick="ofEl('ofCaptureInput').click()" class="bg-slate-100 p-2 rounded">Cámara del móvil</button><button type="button" onclick="ofEl('ofPhotoInput').click()" class="bg-slate-100 p-2 rounded">Adjuntar fotografías</button></div><input id="ofCaptureInput" type="file" accept="image/*" capture="environment" onchange="ofReadPhotos(event)" class="hidden"><input id="ofPhotoInput" type="file" accept="image/*" multiple onchange="ofReadPhotos(event)" class="hidden"><div id="ofCameraBox" class="hidden"><video id="ofCameraVideo" autoplay muted playsinline class="w-full max-h-72 bg-black"></video><button type="button" onclick="ofTakePhoto()" class="bg-emerald-600 text-white p-2 rounded">Tomar fotografía</button><button type="button" onclick="ofStopCamera()" class="p-2">Cerrar cámara</button></div><p id="ofCameraMessage" role="status" class="text-xs text-slate-500">Fotos locales en IndexedDB, JPEG de hasta 1600 px. Conserva los originales si los necesitas.</p><div id="ofDraftPhotos" class="grid grid-cols-2 gap-3"></div><div class="flex justify-end gap-2"><button type="button" onclick="ofCloseVisit()" class="bg-slate-200 p-2 rounded">Cancelar</button><button id="ofVisitSave" type="submit" class="bg-emerald-600 text-white p-2 rounded">Guardar tratamiento</button></div></form></div></div>
+<script>
+let ofDraft=null,ofStream=null,ofBusy=false,ofRenderToken=0;
+const ofEl=id=>document.getElementById(id),ofEscape=value=>escapeHtml(String(value??''));
+const ofID=()=>crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2);
+const ofDB=new Promise((resolve,reject)=>{const r=indexedDB.open('odontoflow_clinical_visits_v1',1);r.onupgradeneeded=()=>r.result.createObjectStore('patients',{keyPath:'patientId'});r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});ofDB.catch(()=>{});
+async function ofStore(mode,work){const db=await ofDB;return new Promise((resolve,reject)=>{const tx=db.transaction('patients',mode);let result;tx.oncomplete=()=>resolve(result);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error('Operación cancelada'));const r=work(tx.objectStore('patients'));if(r)r.onsuccess=()=>result=r.result;});}
+async function ofGetVisits(id){return(await ofStore('readonly',s=>s.get(id)))?.visits||[];}
+async function ofPutVisits(id,visits){await ofStore('readwrite',s=>s.put({patientId:id,visits}));}
+function ofPhotoMarkup(p){return /^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(p.data||'')?`<img src="${p.data}" alt="Fotografía del tratamiento" style="max-width:100%;max-height:260px;object-fit:contain">`:'Imagen no válida';}
+function ofVisitMarkup(v){return `<h3 class="font-bold text-indigo-700">${ofEscape(v.date)} ${ofEscape(v.time)} — ${ofEscape(v.type)}</h3><p>Piezas: ${ofEscape(v.teeth||'No especificadas')} · Profesional: ${ofEscape(v.doctor||'No especificado')}</p><p style="white-space:pre-wrap">${ofEscape(v.notes)}</p><details><summary>Fotografías (${(v.photos||[]).length})</summary>${(v.photos||[]).map(p=>`<div>${ofPhotoMarkup(p)}<p>${ofEscape(p.caption)}</p></div>`).join('')}</details>`;}
+async function ofRenderVisits(){const token=++ofRenderToken,id=patientData.id;try{const all=await ofGetVisits(id);if(token!==ofRenderToken||id!==patientData.id)return;const q=ofEl('ofVisitSearch').value.toLowerCase(),date=ofEl('ofVisitFilterDate').value,rows=all.filter(v=>(!date||v.date===date)&&[v.type,v.notes,v.teeth,v.doctor].join(' ').toLowerCase().includes(q)).sort((a,b)=>(b.date+b.time).localeCompare(a.date+a.time));ofEl('ofVisitList').innerHTML='';if(!rows.length)ofEl('ofVisitList').textContent='No hay tratamientos para mostrar.';rows.forEach(v=>{const card=document.createElement('article');card.className='border rounded-xl p-3 space-y-2';card.innerHTML=ofVisitMarkup(v);const button=document.createElement('button');button.type='button';button.textContent='Editar / agregar fotografías';button.className='text-indigo-700 underline';button.onclick=()=>ofOpenVisit(v.id);card.appendChild(button);ofEl('ofVisitList').appendChild(card);});}catch(e){if(token===ofRenderToken)ofEl('ofVisitList').textContent='No se pudo acceder al historial local.';}}
+async function ofOpenVisit(visitId){if(ofBusy)return;try{savePatientData();if(!patientData.name.trim()){showAlert('Falta el paciente','Abre un paciente o escribe su nombre.');return;}executeStorageSave();const id=patientData.id,visits=await ofGetVisits(id);if(id!==patientData.id)return;const found=visitId?visits.find(v=>v.id===visitId):null;if(visitId&&!found)return;const now=new Date(),local=new Date(now-now.getTimezoneOffset()*60000).toISOString();ofDraft=found?JSON.parse(JSON.stringify(found)):{id:ofID(),date:local.slice(0,10),time:local.slice(11,16),type:'',teeth:'',doctor:patientData.doctor||'',notes:'',photos:[],createdAt:now.toISOString()};ofDraft.patientId=id;for(const key of ['date','time','type','teeth','doctor','notes'])ofEl('ofVisit'+key[0].toUpperCase()+key.slice(1)).value=ofDraft[key]||'';ofEl('ofVisitPatient').textContent=patientData.name+' · '+id;ofEl('ofVisitTypes').innerHTML=[...new Set(['Curación','Control de ortodoncia','Carillas','Control de ortopedia maxilar',...(appSettings.tariffs||[]).map(t=>t.name)])].map(t=>`<option value="${ofEscape(t)}"></option>`).join('');ofRenderDraft();ofEl('ofVisitModal').classList.remove('hidden');ofEl('ofVisitModal').classList.add('flex');}catch(e){showAlert('Error','No se pudo abrir el formulario. '+e.message);}}
+function ofCloseVisit(){if(ofBusy)return;if(ofDraft&&!confirm('¿Cerrar sin guardar este tratamiento?'))return;ofStopCamera();ofDraft=null;ofEl('ofVisitModal').classList.add('hidden');ofEl('ofVisitModal').classList.remove('flex');}
+function ofRenderDraft(){ofEl('ofDraftPhotos').innerHTML='';(ofDraft?.photos||[]).forEach((p,i)=>{const box=document.createElement('div');box.innerHTML=ofPhotoMarkup(p);const caption=document.createElement('input');caption.value=p.caption||'';caption.placeholder='Descripción de la foto';caption.maxLength=500;caption.className='border p-1 w-full text-xs';caption.oninput=()=>p.caption=caption.value;box.appendChild(caption);const b=document.createElement('button');b.type='button';b.textContent='Quitar foto';b.className='text-rose-600 text-xs';b.onclick=()=>{if(ofBusy)return;ofDraft.photos.splice(i,1);ofRenderDraft();};box.appendChild(b);ofEl('ofDraftPhotos').appendChild(box);});}
+function ofStopCamera(){if(ofStream)ofStream.getTracks().forEach(t=>t.stop());ofStream=null;ofEl('ofCameraVideo').srcObject=null;ofEl('ofCameraBox').classList.add('hidden');}
+async function ofStartCamera(){if(!ofDraft||ofBusy)return;const draft=ofDraft;ofStopCamera();try{if(!navigator.mediaDevices?.getUserMedia)throw new Error('Usa HTTPS o localhost, o el botón Cámara del móvil.');const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});if(ofDraft!==draft){stream.getTracks().forEach(t=>t.stop());return;}ofStream=stream;ofEl('ofCameraVideo').srcObject=stream;ofEl('ofCameraBox').classList.remove('hidden');await ofEl('ofCameraVideo').play();}catch(e){ofStopCamera();ofEl('ofCameraMessage').textContent='No se pudo abrir la cámara. '+e.message;}}
+function ofImageData(img){const w=img.videoWidth||img.naturalWidth,h=img.videoHeight||img.naturalHeight;if(!w||!h)throw new Error('Imagen no disponible');const scale=Math.min(1,1600/Math.max(w,h)),c=document.createElement('canvas');c.width=Math.round(w*scale);c.height=Math.round(h*scale);c.getContext('2d').drawImage(img,0,0,c.width,c.height);return c.toDataURL('image/jpeg',.85);}
+function ofTakePhoto(){if(!ofDraft||ofBusy)return;try{ofDraft.photos.push({id:ofID(),data:ofImageData(ofEl('ofCameraVideo')),caption:'',capturedAt:new Date().toISOString()});ofRenderDraft();}catch(e){ofEl('ofCameraMessage').textContent='Espera a que se muestre la imagen.';}}
+async function ofReadPhotos(event){const files=Array.from(event.target.files||[]);event.target.value='';if(!ofDraft||ofBusy)return;const draft=ofDraft;ofBusy=true;ofEl('ofVisitSave').disabled=true;try{for(const f of files){if(!f.type.startsWith('image/')||f.size>20*1024*1024)throw new Error('Solo imágenes de hasta 20 MB.');const url=URL.createObjectURL(f);try{const img=new Image();img.src=url;await img.decode();draft.photos.push({id:ofID(),data:ofImageData(img),caption:'',capturedAt:new Date().toISOString()});}finally{URL.revokeObjectURL(url);}}}catch(e){ofEl('ofCameraMessage').textContent=e.message;}finally{ofBusy=false;ofEl('ofVisitSave').disabled=false;ofRenderDraft();}}
+async function ofSaveVisit(event){event.preventDefault();if(ofBusy||!ofDraft)return;if(ofDraft.patientId!==patientData.id){showAlert('Paciente cambiado','Abre de nuevo el formulario del paciente correcto.');return;}if(!ofEl('ofVisitType').value.trim())return;ofBusy=true;ofEl('ofVisitSave').disabled=true;try{for(const key of ['date','time','type','teeth','doctor','notes'])ofDraft[key]=ofEl('ofVisit'+key[0].toUpperCase()+key.slice(1)).value.trim();ofDraft.updatedAt=new Date().toISOString();const all=await ofGetVisits(ofDraft.patientId),i=all.findIndex(v=>v.id===ofDraft.id),saved=JSON.parse(JSON.stringify(ofDraft));if(i<0)all.push(saved);else all[i]=saved;await ofPutVisits(ofDraft.patientId,all);ofStopCamera();ofDraft=null;ofEl('ofVisitModal').classList.add('hidden');ofEl('ofVisitModal').classList.remove('flex');await ofRenderVisits();showAlert('Tratamiento guardado','La atención y sus fotografías se guardaron localmente.');}catch(e){showAlert('No se guardó','El formulario permanece abierto. Revisa el espacio y los permisos del navegador. '+e.message);}finally{ofBusy=false;ofEl('ofVisitSave').disabled=false;}}
+async function ofPrintVisits(){const name=patientData.name,id=patientData.id,w=window.open('','_blank');if(!w){showAlert('Ventana bloqueada','Permite ventanas emergentes.');return;}try{const all=(await ofGetVisits(id)).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));w.document.write(`<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><title>Historial de tratamientos</title><style>body{font:14px Arial;padding:24px}article{border-bottom:1px solid #ccc;padding:12px 0}@media print{button{display:none}details{display:block}}</style></head><body><button onclick="window.print()">Imprimir / guardar PDF</button><h1>${ofEscape(name)} · ${ofEscape(id)}</h1>${all.map(v=>'<article>'+ofVisitMarkup(v).replace('<details>','<details open>')+'</article>').join('')}</body></html>`);w.document.close();}catch(e){w.close();showAlert('Error','No se pudo imprimir el historial.');}}
+const ofOriginalUpdate=updatePatientUIFields;updatePatientUIFields=function(){ofOriginalUpdate();ofEl('ofVisitSearch').value='';ofEl('ofVisitFilterDate').value='';ofRenderVisits();};window.addEventListener('pagehide',ofStopCamera);
+exportFullDatabase=async function(){try{savePatientData();executeStorageSave();const data={};BACKUP_STORAGE_KEYS.forEach(k=>data[k]=localStorage.getItem(k));const clinicalVisits=await ofStore('readonly',s=>s.getAll()),blob=new Blob([JSON.stringify({app:'OdontoFlow Studio Pro',formatVersion:1,exportedAt:new Date().toISOString(),data,clinicalVisits},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='odontoflow_respaldo_'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);showAlert('Respaldo generado','Incluye tratamientos, fotografías y configuración guardados.');}catch(e){showAlert('Error','No se generó el respaldo completo. '+e.message);}};
+handleDatabaseImport=async function(event){const f=event.target.files?.[0];event.target.value='';if(!f)return;try{const b=JSON.parse(await f.text());if(b.app!=='OdontoFlow Studio Pro'||b.formatVersion!==1||!b.data)throw new Error('Formato incorrecto');BACKUP_STORAGE_KEYS.forEach(k=>{if(!Object.prototype.hasOwnProperty.call(b.data,k))throw new Error('Faltan datos');if(b.data[k]!==null){if(typeof b.data[k]!=='string')throw new Error('Datos incorrectos');JSON.parse(b.data[k]);}});if(b.clinicalVisits!==undefined){if(!Array.isArray(b.clinicalVisits))throw new Error('Historial incorrecto');const ids=new Set();b.clinicalVisits.forEach(row=>{if(typeof row.patientId!=='string'||!Array.isArray(row.visits)||ids.has(row.patientId))throw new Error('Paciente incorrecto');ids.add(row.patientId);row.visits.forEach(v=>{if(typeof v.id!=='string'||typeof v.date!=='string'||typeof v.time!=='string'||typeof v.type!=='string'||!Array.isArray(v.photos))throw new Error('Tratamiento incorrecto');v.photos.forEach(p=>{if(!/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(p.data||''))throw new Error('Fotografía incorrecta');});});});}showConfirmModal('Importar base completa','Reemplazará todos los datos locales. '+(b.clinicalVisits===undefined?'Este respaldo antiguo dejará vacío el historial de tratamientos. ':'')+'Exporta primero una copia de seguridad. ¿Continuar?',()=>ofImportBackup(b));}catch(e){showAlert('Respaldo no válido',e.message);}};
+async function ofImportBackup(b){const previous={};BACKUP_STORAGE_KEYS.forEach(k=>previous[k]=localStorage.getItem(k));let changed=false;try{await ofDB;changed=true;BACKUP_STORAGE_KEYS.forEach(k=>b.data[k]===null?localStorage.removeItem(k):localStorage.setItem(k,b.data[k]));await ofStore('readwrite',s=>{s.clear();(b.clinicalVisits||[]).forEach(row=>s.put(row));});window.location.reload();}catch(e){if(changed)try{BACKUP_STORAGE_KEYS.forEach(k=>previous[k]===null?localStorage.removeItem(k):localStorage.setItem(k,previous[k]));}catch(rollback){console.error(rollback);}showAlert('Error','No se completó la importación. '+e.message);}}
+</script>
+
 </body>
 </html>
